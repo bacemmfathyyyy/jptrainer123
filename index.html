@@ -1,0 +1,2050 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tenno Routine — Warframe Checklist</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Exo+2:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+/* ─── Variables ─────────────────────────────────────────── */
+:root {
+  --gold:        #C9A84C;
+  --gold-light:  #F0D080;
+  --gold-dim:    #7A6030;
+  --gold-glow:   rgba(201,168,76,0.15);
+  --teal:        #4ECDC4;
+  --teal-dim:    #2A8A84;
+  --red:         #E05050;
+  --green:       #5CBF8A;
+  --blue:        #5AAEE0;
+  --purple:      #9B6FD4;
+  --orange:      #E08840;
+
+  --bg0:   #080B0E;
+  --bg1:   #0C1018;
+  --bg2:   #111820;
+  --bg3:   #172030;
+  --bg4:   #1E2A3C;
+
+  --border:      rgba(201,168,76,0.14);
+  --border-med:  rgba(201,168,76,0.30);
+  --border-hi:   rgba(201,168,76,0.50);
+
+  --txt:     #C8C0AE;
+  --txt-dim: #6A6258;
+  --txt-hi:  #EAE4D6;
+  --txt-lo:  #4A4540;
+}
+
+/* ─── Reset ──────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 15px; }
+body {
+  font-family: 'Exo 2', sans-serif;
+  background: var(--bg0);
+  color: var(--txt);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Ambient glow */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background:
+    radial-gradient(ellipse 60% 40% at 15% 60%, rgba(78,205,196,.025) 0%, transparent 100%),
+    radial-gradient(ellipse 50% 40% at 85% 20%, rgba(201,168,76,.03) 0%, transparent 100%),
+    radial-gradient(ellipse 40% 30% at 50% 85%, rgba(155,111,212,.02) 0%, transparent 100%);
+  pointer-events: none; z-index: 0;
+}
+
+/* ─── Typography helpers ─────────────────────────────────── */
+.mono { font-family: 'Share Tech Mono', monospace; }
+.raj  { font-family: 'Rajdhani', sans-serif; }
+
+/* ─── HEADER ─────────────────────────────────────────────── */
+header {
+  position: relative; z-index: 2;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, transparent, rgba(201,168,76,.025));
+}
+
+.header-top {
+  max-width: 1140px; margin: 0 auto;
+  padding: 36px 24px 0;
+  text-align: center;
+}
+
+.eyebrow {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px; letter-spacing: .28em;
+  color: var(--teal); text-transform: uppercase;
+  opacity: .75; margin-bottom: 10px;
+}
+
+.site-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: clamp(38px, 6vw, 72px);
+  font-weight: 700; letter-spacing: .09em;
+  text-transform: uppercase; line-height: 1;
+  color: var(--gold-light);
+  text-shadow: 0 0 80px rgba(201,168,76,.2);
+  margin-bottom: 6px;
+}
+
+.site-sub {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: clamp(12px, 1.8vw, 16px);
+  letter-spacing: .18em; color: var(--txt-dim);
+  text-transform: uppercase; margin-bottom: 28px;
+}
+
+/* ─── TIMERS BAR ──────────────────────────────────────────── */
+.timers-bar {
+  display: flex; flex-wrap: wrap;
+  border-top: 1px solid var(--border);
+}
+
+.timer-cell {
+  flex: 1 1 160px;
+  padding: 16px 22px;
+  border-right: 1px solid var(--border);
+  text-align: center;
+  background: var(--bg1);
+  position: relative;
+}
+.timer-cell:last-child { border-right: none; }
+
+.timer-cell::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 2px;
+}
+.timer-daily::after  { background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+.timer-weekly::after { background: linear-gradient(90deg, transparent, var(--teal), transparent); }
+.timer-baro::after   { background: linear-gradient(90deg, transparent, var(--purple), transparent); }
+
+.timer-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 9px; letter-spacing: .2em;
+  color: var(--txt-dim); text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+.timer-value {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 26px; font-weight: 700;
+  letter-spacing: .04em; line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.tv-daily  { color: var(--gold-light); }
+.tv-weekly { color: var(--teal); }
+.tv-baro   { color: var(--purple); }
+
+.timer-sub {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 9px; color: var(--txt-dim);
+  margin-top: 4px;
+}
+
+/* ─── MR BAR ──────────────────────────────────────────────── */
+.mr-bar {
+  background: var(--bg1);
+  border-top: 1px solid var(--border);
+  padding: 12px 24px;
+  display: flex; align-items: center;
+  justify-content: center; gap: 18px; flex-wrap: wrap;
+}
+
+.mr-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px; color: var(--txt-dim);
+  letter-spacing: .14em; text-transform: uppercase;
+}
+
+.mr-field {
+  display: flex; align-items: center; gap: 8px;
+}
+
+.mr-input {
+  width: 64px;
+  background: var(--bg3);
+  border: 1px solid var(--border-med);
+  border-radius: 4px;
+  color: var(--gold-light);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 18px; font-weight: 700;
+  text-align: center; padding: 4px 6px;
+  outline: none; transition: border-color .2s;
+}
+.mr-input:focus { border-color: var(--gold); }
+
+.mr-cap-val {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px; color: var(--gold);
+}
+
+/* ─── PROGRESS BAR ────────────────────────────────────────── */
+.progress-strip {
+  background: var(--bg1);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 24px;
+}
+
+.progress-inner {
+  max-width: 1140px; margin: 0 auto;
+  display: flex; gap: 20px; flex-wrap: wrap;
+}
+
+.prog-item { flex: 1 1 180px; }
+
+.prog-top {
+  display: flex; justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.prog-name {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 9px; letter-spacing: .18em;
+  color: var(--txt-dim); text-transform: uppercase;
+}
+
+.prog-num {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 13px; font-weight: 600; color: var(--txt-hi);
+}
+
+.prog-track {
+  height: 3px; background: var(--bg3);
+  border-radius: 2px; overflow: hidden;
+}
+
+.prog-fill {
+  height: 100%; border-radius: 2px;
+  transition: width .5s cubic-bezier(.34,1.56,.64,1);
+}
+.pf-daily  { background: linear-gradient(90deg, var(--gold-dim), var(--gold)); }
+.pf-weekly { background: linear-gradient(90deg, var(--teal-dim), var(--teal)); }
+
+/* ─── CONTROLS ────────────────────────────────────────────── */
+.controls-bar {
+  background: var(--bg1);
+  border-bottom: 1px solid var(--border);
+  padding: 9px 24px;
+}
+
+.controls-inner {
+  max-width: 1140px; margin: 0 auto;
+  display: flex; justify-content: space-between;
+  align-items: center; flex-wrap: wrap; gap: 8px;
+}
+
+.resets { display: flex; gap: 6px; flex-wrap: wrap; }
+
+.btn-reset {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 9px; letter-spacing: .1em;
+  padding: 5px 11px; background: transparent;
+  border: 1px solid var(--border-med);
+  border-radius: 3px; color: var(--txt-dim);
+  cursor: pointer; text-transform: uppercase;
+  transition: all .15s;
+}
+.btn-reset:hover { background: var(--bg3); color: var(--txt-hi); border-color: var(--gold-dim); }
+
+.filters { display: flex; gap: 5px; flex-wrap: wrap; }
+
+.ftag {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 9px; letter-spacing: .08em;
+  padding: 4px 9px; border-radius: 20px; border: 1px solid;
+  cursor: pointer; text-transform: uppercase;
+  transition: opacity .15s; user-select: none;
+}
+.ftag:not(.on) { opacity: .28; }
+.ftag.on  { opacity: 1; }
+.ftag:hover { opacity: .7; }
+
+.ft-urgent { color: var(--red);    border-color: var(--red);    background: rgba(224,80,80,.08); }
+.ft-shard  { color: var(--blue);   border-color: var(--blue);   background: rgba(90,174,224,.08); }
+.ft-plat   { color: var(--purple); border-color: var(--purple); background: rgba(155,111,212,.08); }
+.ft-kuva   { color: var(--orange); border-color: var(--orange); background: rgba(224,136,64,.08); }
+.ft-endo   { color: var(--green);  border-color: var(--green);  background: rgba(92,191,138,.08); }
+
+/* ─── MAIN ────────────────────────────────────────────────── */
+main {
+  max-width: 1140px; margin: 0 auto;
+  padding: 32px 24px 60px;
+  position: relative; z-index: 1;
+}
+
+/* ─── SECTION HEADER ──────────────────────────────────────── */
+.section { margin-bottom: 44px; }
+
+.sec-head {
+  display: flex; align-items: center; gap: 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 18px;
+  cursor: pointer; user-select: none;
+  position: relative;
+}
+
+.sec-head::after {
+  content: '';
+  position: absolute; bottom: -1px; left: 0;
+  height: 2px; width: 70px;
+}
+.sec-head.sh-daily::after   { background: var(--gold); }
+.sec-head.sh-weekly::after  { background: var(--teal); }
+.sec-head.sh-synds::after   { background: var(--purple); }
+.sec-head.sh-relics::after  { background: var(--blue); }
+.sec-head.sh-habits::after  { background: var(--teal); }
+
+.sec-dot {
+  width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0;
+}
+.dot-daily   { background: var(--gold);   box-shadow: 0 0 8px var(--gold); }
+.dot-weekly  { background: var(--teal);   box-shadow: 0 0 8px var(--teal); }
+.dot-synds   { background: var(--purple); box-shadow: 0 0 8px var(--purple); }
+.dot-relics  { background: var(--blue);   box-shadow: 0 0 8px var(--blue); }
+.dot-habits  { background: var(--teal);   box-shadow: 0 0 8px var(--teal); }
+
+.sec-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 19px; font-weight: 700;
+  color: var(--txt-hi); text-transform: uppercase;
+  letter-spacing: .1em;
+}
+
+.sec-note {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 9px; color: var(--txt-dim);
+  letter-spacing: .1em;
+  display: none;
+}
+@media (min-width: 540px) { .sec-note { display: block; } }
+
+.sec-badge {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px; color: var(--txt-dim);
+  margin-left: auto;
+}
+
+.sec-caret {
+  font-size: 11px; color: var(--txt-lo);
+  transition: transform .25s; flex-shrink: 0;
+}
+.sec-caret.open { transform: rotate(180deg); }
+
+/* ─── TASK GRID ───────────────────────────────────────────── */
+.task-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 10px;
+}
+
+/* ─── TASK CARD ───────────────────────────────────────────── */
+.card {
+  background: var(--bg1);
+  border: 1px solid var(--border);
+  border-radius: 6px; overflow: hidden;
+  transition: border-color .2s, transform .15s;
+  position: relative;
+}
+.card:hover { border-color: var(--border-med); transform: translateY(-1px); }
+
+.card.done { opacity: .45; }
+.card.done:hover { opacity: .58; }
+.card.hidden { display: none; }
+
+/* colour strip at top */
+.strip { height: 2px; }
+.strip-daily  { background: linear-gradient(90deg, var(--gold), transparent 70%); }
+.strip-weekly { background: linear-gradient(90deg, var(--teal), transparent 70%); }
+.strip-urgent { background: linear-gradient(90deg, var(--red), var(--gold) 60%, transparent); }
+.strip-relics { background: linear-gradient(90deg, var(--blue), transparent 70%); }
+
+/* card main row */
+.card-row {
+  display: flex; align-items: flex-start;
+  gap: 11px; padding: 13px 13px 9px;
+  cursor: pointer;
+}
+
+/* checkbox */
+.chk {
+  width: 20px; height: 20px; flex-shrink: 0; margin-top: 1px;
+  border-radius: 3px; border: 1.5px solid var(--border-med);
+  display: flex; align-items: center; justify-content: center;
+  transition: background .15s, border-color .15s;
+}
+.chk.ticked { background: var(--gold); border-color: var(--gold); }
+.chk.ticked::after {
+  content: '';
+  width: 10px; height: 6px;
+  border-left: 2px solid var(--bg0);
+  border-bottom: 2px solid var(--bg0);
+  transform: rotate(-45deg) translateY(-1px);
+  display: block;
+}
+
+/* card body */
+.card-body { flex: 1; min-width: 0; }
+
+.card-name {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 15px; font-weight: 600;
+  color: var(--txt-hi); letter-spacing: .03em;
+  line-height: 1.25; margin-bottom: 5px;
+}
+.done .card-name { text-decoration: line-through; color: var(--txt-dim); }
+
+.card-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 6px; }
+
+.tag {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 8px; letter-spacing: .08em;
+  padding: 2px 7px; border-radius: 2px;
+  border: 1px solid; text-transform: uppercase;
+}
+.tag-urgent { color: #FF8888; border-color: rgba(224,80,80,.35); background: rgba(224,80,80,.1); }
+.tag-shard  { color: #88BEFF; border-color: rgba(90,174,224,.3); background: rgba(90,174,224,.08); }
+.tag-plat   { color: #C0A0FF; border-color: rgba(155,111,212,.3); background: rgba(155,111,212,.08); }
+.tag-kuva   { color: #FFA060; border-color: rgba(224,136,64,.3); background: rgba(224,136,64,.08); }
+.tag-endo   { color: #88DDB0; border-color: rgba(92,191,138,.3); background: rgba(92,191,138,.08); }
+.tag-credits{ color: var(--gold); border-color: rgba(201,168,76,.3); background: rgba(201,168,76,.08); }
+.tag-focus  { color: #FFC080; border-color: rgba(255,192,128,.3); background: rgba(255,192,128,.08); }
+.tag-steel  { color: #B0B0A0; border-color: rgba(176,176,160,.25); background: rgba(176,176,160,.06); }
+.tag-arcane { color: var(--teal); border-color: rgba(78,205,196,.3); background: rgba(78,205,196,.08); }
+
+.card-desc {
+  font-size: 11.5px; color: var(--txt-dim);
+  line-height: 1.55;
+}
+
+/* expand trigger */
+.expand-zone { padding: 0 13px 9px 44px; }
+
+.expand-btn {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 9px; letter-spacing: .1em;
+  color: var(--gold-dim); text-transform: uppercase;
+  background: none; border: none; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 0; transition: color .15s;
+}
+.expand-btn:hover { color: var(--gold); }
+
+.expand-arrow { transition: transform .2s; display: inline-block; }
+.expand-arrow.open { transform: rotate(180deg); }
+
+/* detail panel */
+.detail {
+  display: none;
+  border-top: 1px solid var(--border);
+  background: var(--bg2);
+}
+.detail.open { display: block; }
+
+.detail-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+}
+
+.dtab {
+  flex: 1; font-family: 'Share Tech Mono', monospace;
+  font-size: 9px; letter-spacing: .1em; text-transform: uppercase;
+  padding: 8px 4px; text-align: center;
+  background: none; border: none; border-bottom: 2px solid transparent;
+  color: var(--txt-dim); cursor: pointer; transition: all .15s;
+}
+.dtab:hover:not(.active) { color: var(--txt); background: rgba(255,255,255,.02); }
+.dtab.active { color: var(--gold); border-bottom-color: var(--gold); background: rgba(201,168,76,.04); }
+
+.dpanel { display: none; padding: 13px 15px; }
+.dpanel.active { display: block; }
+
+.dpanel p {
+  font-size: 12px; line-height: 1.7; color: var(--txt);
+  margin-bottom: 8px;
+}
+.dpanel p:last-child { margin-bottom: 0; }
+.dpanel p strong { color: var(--gold-light); font-weight: 600; }
+.dpanel p em     { color: var(--teal); font-style: normal; }
+
+.tip-block {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px; line-height: 1.6;
+  color: var(--teal); background: rgba(78,205,196,.05);
+  border: 1px solid rgba(78,205,196,.18);
+  border-radius: 3px; padding: 8px 11px; margin-top: 9px;
+}
+.tip-block::before {
+  content: '// conseil  ';
+  color: var(--teal-dim); font-size: 9px;
+  display: block; margin-bottom: 2px;
+}
+
+.reward-row {
+  display: flex; align-items: baseline;
+  gap: 8px; padding: 4px 0;
+  border-bottom: 1px solid rgba(255,255,255,.04);
+  font-size: 12px; color: var(--txt);
+}
+.reward-row:last-child { border-bottom: none; }
+
+.rdot {
+  width: 5px; height: 5px; border-radius: 50%;
+  flex-shrink: 0; margin-top: 4px;
+}
+.rd-gold   { background: var(--gold); }
+.rd-teal   { background: var(--teal); }
+.rd-purple { background: var(--purple); }
+.rd-green  { background: var(--green); }
+.rd-blue   { background: var(--blue); }
+.rd-orange { background: var(--orange); }
+
+/* ─── INFO BOXES ──────────────────────────────────────────── */
+.info-box {
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 16px 18px;
+  margin-bottom: 14px;
+  background: var(--bg1);
+}
+.info-box.teal-box  { border-color: rgba(78,205,196,.22); background: rgba(78,205,196,.03); }
+.info-box.blue-box  { border-color: rgba(90,174,224,.22); background: rgba(90,174,224,.03); }
+.info-box.green-box { border-color: rgba(92,191,138,.22); background: rgba(92,191,138,.03); }
+.info-box.gold-box  { border-color: rgba(201,168,76,.22); background: rgba(201,168,76,.03); }
+
+.info-title {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 9px; letter-spacing: .2em; text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.it-teal   { color: var(--teal); }
+.it-blue   { color: var(--blue); }
+.it-green  { color: var(--green); }
+.it-gold   { color: var(--gold); }
+
+.tip-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 8px;
+}
+
+.tip-item {
+  font-size: 11.5px; line-height: 1.6; color: var(--txt-dim);
+  padding: 8px 11px; border-radius: 4px;
+  border: 1px solid;
+}
+.tip-item strong { font-weight: 600; }
+.teal-box  .tip-item { border-color: rgba(78,205,196,.12);  background: rgba(78,205,196,.03);  }
+.teal-box  .tip-item strong { color: var(--teal); }
+.blue-box  .tip-item { border-color: rgba(90,174,224,.12);  background: rgba(90,174,224,.03);  }
+.blue-box  .tip-item strong { color: var(--blue); }
+.green-box .tip-item { border-color: rgba(92,191,138,.12);  background: rgba(92,191,138,.03);  }
+.green-box .tip-item strong { color: var(--green); }
+.gold-box  .tip-item { border-color: rgba(201,168,76,.12);  background: rgba(201,168,76,.03);  }
+.gold-box  .tip-item strong { color: var(--gold); }
+
+/* ─── TABLE ───────────────────────────────────────────────── */
+.data-table {
+  width: 100%; border-collapse: collapse;
+  background: var(--bg1);
+  border: 1px solid var(--border);
+  border-radius: 5px; overflow: hidden;
+  margin-bottom: 14px;
+}
+
+.data-table th {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 9px; letter-spacing: .15em; text-transform: uppercase;
+  color: var(--txt-dim); padding: 9px 14px; text-align: left;
+  background: var(--bg2); border-bottom: 1px solid var(--border);
+}
+
+.data-table td {
+  padding: 10px 14px; font-size: 12px; color: var(--txt);
+  border-bottom: 1px solid rgba(255,255,255,.04);
+  vertical-align: top;
+}
+.data-table tr:last-child td { border-bottom: none; }
+
+.data-table td:first-child {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 14px; font-weight: 600;
+  color: var(--txt-hi);
+}
+
+/* ─── SYNDICATES GRID ─────────────────────────────────────── */
+.synd-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 10px;
+}
+
+.synd-card {
+  background: var(--bg1);
+  border: 1px solid var(--border);
+  border-radius: 5px; overflow: hidden;
+  transition: border-color .2s;
+}
+.synd-card:hover { border-color: var(--border-med); }
+
+.synd-head {
+  padding: 11px 13px;
+  display: flex; align-items: center; gap: 11px;
+  border-bottom: 1px solid var(--border);
+}
+
+.synd-icon {
+  width: 34px; height: 34px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 13px; font-weight: 700; flex-shrink: 0;
+}
+
+.synd-name-block {}
+.synd-name {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 14px; font-weight: 600;
+  color: var(--txt-hi); letter-spacing: .03em;
+}
+.synd-type {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 9px; color: var(--txt-dim); letter-spacing: .06em;
+}
+
+.synd-body { padding: 11px 13px; }
+
+.synd-line {
+  font-size: 11.5px; color: var(--txt-dim);
+  line-height: 1.6; margin-bottom: 7px;
+}
+.synd-line strong { color: var(--txt); font-weight: 500; }
+
+.synd-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 9px; }
+
+.synd-tag {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 9px; padding: 2px 8px; border-radius: 2px;
+  background: rgba(201,168,76,.07);
+  color: var(--gold-dim); border: 1px solid rgba(201,168,76,.14);
+  text-transform: uppercase; letter-spacing: .06em;
+}
+
+/* ─── DIVIDER ─────────────────────────────────────────────── */
+.divider {
+  height: 1px; margin: 8px 0 36px;
+  background: linear-gradient(90deg, transparent, var(--border-med), transparent);
+}
+
+/* ─── SCROLL TOP ──────────────────────────────────────────── */
+#back-top {
+  position: fixed; bottom: 22px; right: 22px;
+  width: 38px; height: 38px;
+  background: var(--bg2); border: 1px solid var(--border-med);
+  border-radius: 4px; display: flex; align-items: center;
+  justify-content: center; cursor: pointer;
+  color: var(--gold); font-size: 16px; z-index: 100;
+  opacity: 0; transition: opacity .3s;
+}
+#back-top.show { opacity: 1; }
+#back-top:hover { background: var(--bg3); }
+
+/* ─── FOOTER ──────────────────────────────────────────────── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 18px 24px; text-align: center;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px; color: var(--txt-dim);
+  letter-spacing: .1em;
+  position: relative; z-index: 1;
+}
+footer a { color: var(--gold-dim); text-decoration: none; }
+footer a:hover { color: var(--gold); }
+
+/* ─── RESPONSIVE ──────────────────────────────────────────── */
+@media (max-width: 560px) {
+  .task-grid { grid-template-columns: 1fr; }
+  .synd-grid { grid-template-columns: 1fr; }
+  .timer-cell { padding: 12px 14px; }
+  .timer-value { font-size: 20px; }
+}
+
+/* ─── ANIMATIONS ──────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.section { animation: fadeUp .35s ease both; }
+.section:nth-child(2) { animation-delay: .06s; }
+.section:nth-child(3) { animation-delay: .12s; }
+.section:nth-child(4) { animation-delay: .18s; }
+.section:nth-child(5) { animation-delay: .24s; }
+
+/* ─── LOGIN SCREEN ───────────────────────────────────────── */
+#login-screen {
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 2rem;
+  padding: 2rem;
+  text-align: center;
+  position: relative; z-index: 10;
+}
+
+.login-eyebrow {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px; letter-spacing: .28em; color: var(--teal);
+  text-transform: uppercase; opacity: .7;
+}
+
+.login-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: clamp(32px, 6vw, 56px);
+  font-weight: 700; color: var(--gold-light);
+  letter-spacing: .08em; text-transform: uppercase;
+  line-height: 1;
+}
+
+.login-sub {
+  font-size: 13px; color: var(--txt-dim);
+  max-width: 340px; line-height: 1.6;
+}
+
+.profile-cards {
+  display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;
+}
+
+.profile-card {
+  width: 180px;
+  background: var(--bg1);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 28px 20px 22px;
+  cursor: pointer;
+  transition: border-color .2s, transform .15s;
+  display: flex; flex-direction: column; align-items: center; gap: 14px;
+}
+.profile-card:hover { transform: translateY(-2px); }
+
+.profile-card.pc-bacem:hover { border-color: var(--gold); }
+.profile-card.pc-rayan:hover { border-color: var(--teal); }
+
+.pc-avatar {
+  width: 56px; height: 56px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 22px; font-weight: 700;
+}
+.pca-bacem { background: rgba(201,168,76,.12); color: var(--gold); border: 1.5px solid rgba(201,168,76,.35); }
+.pca-rayan { background: rgba(78,205,196,.12); color: var(--teal); border: 1.5px solid rgba(78,205,196,.35); }
+
+.pc-name {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 18px; font-weight: 600; color: var(--txt-hi);
+  letter-spacing: .05em;
+}
+
+.pc-prog-wrap { width: 100%; }
+.pc-prog-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 9px; color: var(--txt-dim);
+  letter-spacing: .1em; text-transform: uppercase;
+  margin-bottom: 5px; display: flex; justify-content: space-between;
+}
+.pc-prog-track {
+  height: 3px; background: var(--bg3);
+  border-radius: 2px; overflow: hidden;
+}
+.pc-prog-fill { height: 100%; border-radius: 2px; transition: width .4s; }
+.ppf-bacem { background: var(--gold); }
+.ppf-rayan { background: var(--teal); }
+
+/* ─── PROFILE BAR (in app) ───────────────────────────────── */
+.profile-bar {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 24px;
+  background: var(--bg1);
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+
+.pb-avatar {
+  width: 30px; height: 30px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 13px; font-weight: 700; flex-shrink: 0;
+}
+.pba-bacem { background: rgba(201,168,76,.15); color: var(--gold); border: 1.5px solid rgba(201,168,76,.4); }
+.pba-rayan { background: rgba(78,205,196,.15); color: var(--teal); border: 1.5px solid rgba(78,205,196,.4); }
+
+.pb-name {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 15px; font-weight: 600; color: var(--txt-hi);
+}
+.pb-sub { font-size: 10px; color: var(--txt-dim); margin-top: 1px; }
+
+.pb-switch {
+  margin-left: auto;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px; letter-spacing: .1em; text-transform: uppercase;
+  padding: 6px 14px;
+  background: transparent;
+  border: 1px solid var(--border-med);
+  border-radius: 3px; color: var(--txt-dim);
+  cursor: pointer; transition: all .15s;
+}
+.pb-switch:hover { background: var(--bg3); color: var(--txt-hi); }
+
+/* ─── OTHER PLAYER MINI CARD ─────────────────────────────── */
+.other-player-bar {
+  background: var(--bg1);
+  border-bottom: 1px solid var(--border);
+  padding: 10px 24px;
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+}
+.opb-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 9px; letter-spacing: .15em; color: var(--txt-dim);
+  text-transform: uppercase;
+}
+.opb-chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.opb-chip {
+  font-size: 10px; padding: 3px 9px;
+  border-radius: 20px; border: 1px solid;
+  font-family: 'Share Tech Mono', monospace;
+  letter-spacing: .06em;
+}
+.opb-chip.done-chip { color: var(--teal); border-color: rgba(78,205,196,.3); background: rgba(78,205,196,.07); }
+.opb-chip.done-chip.bacem-chip { color: var(--gold); border-color: rgba(201,168,76,.3); background: rgba(201,168,76,.07); }
+
+/* ─── CARD DONE-BY-OTHER INDICATOR ──────────────────────── */
+.other-tick {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 9px; padding: 2px 7px;
+  border-radius: 2px;
+  letter-spacing: .06em;
+  flex-shrink: 0; align-self: flex-start; margin-top: 2px;
+}
+.ot-bacem { color: var(--gold-dim); background: rgba(201,168,76,.08); border: 1px solid rgba(201,168,76,.2); }
+.ot-rayan { color: var(--teal-dim); background: rgba(78,205,196,.08); border: 1px solid rgba(78,205,196,.2); }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════ LOGIN ══════════════════ -->
+<div id="login-screen">
+  <div class="login-eyebrow">Tenno Daily Operations</div>
+  <div class="login-title">Warframe Routine</div>
+  <div class="login-sub">Choisis ton profil — ta progression est sauvegardée séparément et tu vois aussi ce que l'autre a coché.</div>
+  <div class="profile-cards">
+    <div class="profile-card pc-bacem" onclick="loginAs('bacem')">
+      <div class="pc-avatar pca-bacem">B</div>
+      <div class="pc-name">Bacemm</div>
+      <div class="pc-prog-wrap">
+        <div class="pc-prog-label">
+          <span>Progression</span>
+          <span id="login-prog-bacem">—</span>
+        </div>
+        <div class="pc-prog-track">
+          <div class="pc-prog-fill ppf-bacem" id="login-bar-bacem" style="width:0%"></div>
+        </div>
+      </div>
+    </div>
+    <div class="profile-card pc-rayan" onclick="loginAs('rayan')">
+      <div class="pc-avatar pca-rayan">R</div>
+      <div class="pc-name">Rayan</div>
+      <div class="pc-prog-wrap">
+        <div class="pc-prog-label">
+          <span>Progression</span>
+          <span id="login-prog-rayan">—</span>
+        </div>
+        <div class="pc-prog-track">
+          <div class="pc-prog-fill ppf-rayan" id="login-bar-rayan" style="width:0%"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="font-size:11px;color:var(--txt-lo);font-family:'Share Tech Mono',monospace;letter-spacing:.05em">
+    chaque profil est indépendant · même fichier · même ordi
+  </div>
+</div>
+
+<!-- ══════════════════ APP (caché jusqu'au login) ══════════════════ -->
+<div id="app-wrapper" style="display:none">
+
+<!-- ══════════════════ HEADER ══════════════════ -->
+<header>
+  <div class="header-top">
+    <div class="eyebrow">Tenno Daily Operations — Système d'Origine</div>
+    <div class="site-title">Warframe Routine</div>
+    <div class="site-sub">Checklist · Syndicats · Reliques · Réflexes</div>
+  </div>
+
+  <div class="timers-bar">
+    <div class="timer-cell timer-daily">
+      <div class="timer-label">Prochain reset daily</div>
+      <div class="timer-value tv-daily" id="t-daily">--:--:--</div>
+      <div class="timer-sub" id="t-daily-date">chaque nuit à 1h00</div>
+    </div>
+    <div class="timer-cell timer-weekly">
+      <div class="timer-label">Prochain reset hebdo</div>
+      <div class="timer-value tv-weekly" id="t-weekly">--:--:--</div>
+      <div class="timer-sub">lundi à 1h00 du matin</div>
+    </div>
+    <div class="timer-cell timer-baro">
+      <div class="timer-label">Prochain Baro Ki'Teer</div>
+      <div class="timer-value tv-baro" id="t-baro">--j --:--</div>
+      <div class="timer-sub" id="t-baro-date">toutes les 2 semaines</div>
+    </div>
+  </div>
+
+  <div class="mr-bar">
+    <span class="mr-label">Ton Mastery Rank</span>
+    <div class="mr-field">
+      <input type="number" class="mr-input" id="mr-in" value="10" min="0" max="32">
+      <span class="mr-cap-val">→ cap daily : <strong id="mr-cap">21 000</strong> standing</span>
+    </div>
+    <span class="mr-label" style="font-size:9px;color:var(--txt-lo)">formule : 16 000 + (MR × 500)</span>
+  </div>
+</header>
+
+<!-- ══════════════════ BARRE PROFIL ACTIF ══════════════════ -->
+<div class="profile-bar">
+  <div class="pb-avatar" id="pb-av"></div>
+  <div>
+    <div class="pb-name" id="pb-name"></div>
+    <div class="pb-sub">Profil actif</div>
+  </div>
+  <button class="pb-switch" onclick="switchProfile()">Changer de profil</button>
+</div>
+
+<!-- ══════════════════ CE QUE L'AUTRE A FAIT ══════════════════ -->
+<div class="other-player-bar" id="other-bar">
+  <span class="opb-label" id="other-label">—</span>
+  <div class="opb-chips" id="other-chips"></div>
+</div>
+
+<!-- ══════════════════ BARRE DE PROGRESSION ══════════════════ -->
+<div class="progress-strip">
+  <div class="progress-inner">
+    <div class="prog-item">
+      <div class="prog-top">
+        <span class="prog-name">Quotidiennes</span>
+        <span class="prog-num" id="pd-num">0 / 0</span>
+      </div>
+      <div class="prog-track">
+        <div class="prog-fill pf-daily" id="pd-bar" style="width:0%"></div>
+      </div>
+    </div>
+    <div class="prog-item">
+      <div class="prog-top">
+        <span class="prog-name">Hebdomadaires</span>
+        <span class="prog-num" id="pw-num">0 / 0</span>
+      </div>
+      <div class="prog-track">
+        <div class="prog-fill pf-weekly" id="pw-bar" style="width:0%"></div>
+      </div>
+    </div>
+    <div class="prog-item">
+      <div class="prog-top">
+        <span class="prog-name">Reliques du jour</span>
+        <span class="prog-num" id="pr-num">0 / 10</span>
+      </div>
+      <div class="prog-track">
+        <div class="prog-fill" id="pr-bar" style="width:0%;background:linear-gradient(90deg,#1A4A7A,var(--blue))"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════ CONTRÔLES ══════════════════ -->
+<div class="controls-bar">
+  <div class="controls-inner">
+    <div class="resets">
+      <button class="btn-reset" onclick="resetType('daily')">↺ Reset quotidien</button>
+      <button class="btn-reset" onclick="resetType('weekly')">↺ Reset hebdo</button>
+      <button class="btn-reset" onclick="resetType('all')">↺ Tout remettre à zéro</button>
+    </div>
+    <div class="filters">
+      <span class="ftag ft-urgent on" data-f="urgent" onclick="toggleF(this)">Prioritaire</span>
+      <span class="ftag ft-shard  on" data-f="shard"  onclick="toggleF(this)">Archon Shard</span>
+      <span class="ftag ft-plat   on" data-f="plat"   onclick="toggleF(this)">Platine</span>
+      <span class="ftag ft-kuva   on" data-f="kuva"   onclick="toggleF(this)">Kuva</span>
+      <span class="ftag ft-endo   on" data-f="endo"   onclick="toggleF(this)">Endo</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ CONTENU PRINCIPAL ══════════════════ -->
+<main>
+
+<!-- ═══════════ 1. QUOTIDIEN ═══════════ -->
+<section class="section" id="s-daily">
+  <div class="sec-head sh-daily" onclick="toggleSec('daily')">
+    <span class="sec-dot dot-daily"></span>
+    <span class="sec-title">Tâches Quotidiennes</span>
+    <span class="sec-note">Reset à 1h00 chaque nuit</span>
+    <span class="sec-badge" id="b-daily">0 / 0</span>
+    <span class="sec-caret open" id="c-daily">▼</span>
+  </div>
+  <div class="task-grid" id="g-daily"></div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════ 2. RELIQUES QUOTIDIENNES ═══════════ -->
+<section class="section" id="s-relics">
+  <div class="sec-head sh-relics" onclick="toggleSec('relics')">
+    <span class="sec-dot dot-relics"></span>
+    <span class="sec-title">Objectif Reliques — 10 par jour</span>
+    <span class="sec-note">Coche chaque relic ouverte</span>
+    <span class="sec-badge" id="b-relics">0 / 10</span>
+    <span class="sec-caret open" id="c-relics">▼</span>
+  </div>
+  <div id="g-relics">
+    <div class="info-box blue-box" style="margin-bottom:14px">
+      <div class="info-title it-blue">// Pourquoi 10 reliques par jour</div>
+      <div class="tip-grid">
+        <div class="tip-item"><strong>Platine passif.</strong> En ouvrant 10 reliques/jour en public, tu accumules des pièces Prime en double. Vendues sur warframe.market, ça représente 50–150 plat/semaine en mode relax.</div>
+        <div class="tip-item"><strong>Stock de Ducats.</strong> Les pièces communes s'échangent contre des Ducats au Relay. Utile pour acheter les items de Baro Ki'Teer (Prime Mods précieux).</div>
+        <div class="tip-item"><strong>Progression constante.</strong> 10 reliques = ~30–40 min maximum. C'est le bon équilibre entre efficacité et plaisir de jeu sans s'épuiser.</div>
+        <div class="tip-item"><strong>Rad-sharing.</strong> Quand tu chasses une pièce rare précise, joue en public avec 4 joueurs équipant la même relic Radiant. Probabilité ×4 d'obtenir la pièce dorée.</div>
+      </div>
+    </div>
+    <div class="task-grid" id="g-relics-tasks"></div>
+    <div style="margin-top:14px">
+      <div class="info-box blue-box">
+        <div class="info-title it-blue">// Où ouvrir chaque tier</div>
+        <table class="data-table" style="margin-bottom:0">
+          <thead>
+            <tr>
+              <th>Tier</th>
+              <th>Meilleur nœud</th>
+              <th>Durée estimée</th>
+              <th>Conseil</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="color:var(--gold)">LITH</td>
+              <td>Hepit (Void) — Capture</td>
+              <td>~2 min</td>
+              <td>Le plus rapide du jeu. Idéal pour cracker en masse.</td>
+            </tr>
+            <tr>
+              <td style="color:var(--blue)">MESO</td>
+              <td>IO (Jupiter) — Defense, 20 vagues</td>
+              <td>~7 min</td>
+              <td>2 relics par rotation. Bon rapport temps/relics.</td>
+            </tr>
+            <tr>
+              <td style="color:var(--red)">NEO</td>
+              <td>Xini (Éris) — Interception</td>
+              <td>~5 min</td>
+              <td>1 relic toutes les 5 min en Survival. Reste pour enchaîner.</td>
+            </tr>
+            <tr>
+              <td style="color:var(--purple)">AXI</td>
+              <td>Hieracon (Pluton) — Excavation</td>
+              <td>~5–8 min</td>
+              <td>Aussi des crédits ×2 (Dark Sector). Double gain.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="info-box blue-box">
+        <div class="info-title it-blue">// Niveaux de raffinement</div>
+        <table class="data-table" style="margin-bottom:0">
+          <thead>
+            <tr>
+              <th>Raffinement</th>
+              <th>Coût (Void Traces)</th>
+              <th>Chance pièce rare</th>
+              <th>Quand l'utiliser</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="color:var(--txt-dim)">Intact</td>
+              <td>0</td>
+              <td>2%</td>
+              <td>Relics inutiles → Ducats et Forma.</td>
+            </tr>
+            <tr>
+              <td style="color:var(--blue)">Exceptionnel</td>
+              <td>25</td>
+              <td>4%</td>
+              <td>Pièces de valeur moyenne (10–30 plat).</td>
+            </tr>
+            <tr>
+              <td style="color:var(--green)">Impeccable</td>
+              <td>50</td>
+              <td>6%</td>
+              <td>Bon compromis traces/gain.</td>
+            </tr>
+            <tr>
+              <td style="color:var(--gold)">Radiant</td>
+              <td>100</td>
+              <td>10%</td>
+              <td>Pièces 80 plat+. Toujours en rad-share (×4 joueurs).</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════ 4. HEBDOMADAIRE ═══════════ -->
+<section class="section" id="s-weekly">
+  <div class="sec-head sh-weekly" onclick="toggleSec('weekly')">
+    <span class="sec-dot dot-weekly"></span>
+    <span class="sec-title">Tâches Hebdomadaires</span>
+    <span class="sec-note">Reset chaque lundi à 1h00</span>
+    <span class="sec-badge" id="b-weekly">0 / 0</span>
+    <span class="sec-caret open" id="c-weekly">▼</span>
+  </div>
+  <div class="task-grid" id="g-weekly"></div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════ 5. SYNDICATS ═══════════ -->
+<section class="section" id="s-synds">
+  <div class="sec-head sh-synds" onclick="toggleSec('synds')">
+    <span class="sec-dot dot-synds"></span>
+    <span class="sec-title">Syndicats &amp; Réputation</span>
+    <span class="sec-note">Cap daily = 16 000 + (MR × 500)</span>
+    <span class="sec-caret open" id="c-synds">▼</span>
+  </div>
+  <div id="g-synds">
+    <div class="info-box gold-box" style="margin-bottom:14px">
+      <div class="info-title it-gold">// Règles fondamentales des Syndicats</div>
+      <div class="tip-grid">
+        <div class="tip-item"><strong>Ne dépasse jamais ta cap.</strong> La réputation au-delà de la limite est perdue définitivement. Vérifie ta jauge dans Profil → Syndicats avant de jouer.</div>
+        <div class="tip-item"><strong>Le Pledge donne 15% de l'Affinity.</strong> Toutes tes missions font monter la réputation automatiquement. Pas besoin de missions dédiées Syndicat au quotidien.</div>
+        <div class="tip-item"><strong>Les Médaillons Syndicat ne comptent pas dans la cap.</strong> Collecte-les dans les missions Syndicate Alert pour dépasser ta limite et gagner de la rep bonus.</div>
+        <div class="tip-item"><strong>Les alliés gagnent 50% de ta rep.</strong> En rejoignant Steel Meridian, Red Veil progresse aussi automatiquement. Choisis ton camp avec soin.</div>
+        <div class="tip-item"><strong>Rang 4 et 5 coûtent de l'Aya.</strong> 2 Aya pour le rang 4, 3 Aya pour le rang 5. Farme l'Aya dans les missions du Void (drop garanti par mission Void).</div>
+        <div class="tip-item"><strong>Achète des packs de Relics.</strong> Chez Ostron, Solaris United et Entrati, 20 000 rep = 3 relics. Excellent investissement passif pour alimenter tes fissures quotidiennes.</div>
+      </div>
+    </div>
+    <div class="synd-grid" id="synd-grid"></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════ 6. BONS RÉFLEXES ═══════════ -->
+<section class="section" id="s-habits">
+  <div class="sec-head sh-habits" onclick="toggleSec('habits')">
+    <span class="sec-dot dot-habits"></span>
+    <span class="sec-title">Bons Réflexes Tenno</span>
+    <span class="sec-note">Habitudes qui changent tout sur le long terme</span>
+    <span class="sec-caret open" id="c-habits">▼</span>
+  </div>
+  <div id="g-habits">
+    <div class="info-box teal-box" style="margin-bottom:14px">
+      <div class="info-title it-teal">// Économie &amp; Trading</div>
+      <div class="tip-grid">
+        <div class="tip-item"><strong>Vérifie warframe.market avant de vendre.</strong> Ne vends jamais une pièce Prime sans regarder les 5 dernières transactions. Certaines pièces commons valent 50 plat.</div>
+        <div class="tip-item"><strong>Vends des Sets complets.</strong> Un Warframe Prime en set (3 pièces) se vend 30–50% plus cher que les pièces séparées. Accumule les 3 parties avant de poster.</div>
+        <div class="tip-item"><strong>Rivens non-identifiés.</strong> Un Riven de la Sortie non ouvert peut valoir 100–400 plat selon l'arme. Vérifie la valeur avant de l'ouvrir ou de le dissoudre.</div>
+        <div class="tip-item"><strong>Prime Mods de Baro.</strong> Quand Baro passe, achète les Prime Mods que tu n'as pas encore. Ils se revendent 2–3 fois leur prix après sa visite. Investissement sûr.</div>
+      </div>
+    </div>
+    <div class="info-box teal-box" style="margin-bottom:14px">
+      <div class="info-title it-teal">// Progression de ton compte</div>
+      <div class="tip-grid">
+        <div class="tip-item"><strong>Level toutes tes armes.</strong> Chaque arme montée au rang 30 = +3 000 points MR. Plus ton MR est élevé, plus ta cap de standing est grande et plus tu peux trader.</div>
+        <div class="tip-item"><strong>Focus Zenurik en priorité.</strong> L'école Opérateur Zenurik régénère ton énergie passivement pendant les missions. Essentiel sur tous les Warframes. Débloques-la avant tout le reste.</div>
+        <div class="tip-item"><strong>Le Simulacrum est indispensable.</strong> Achète la clé chez Cephalon Simaris. Tu peux tester n'importe quel build contre tous les ennemis du jeu, sans risque et sans limite.</div>
+        <div class="tip-item"><strong>Archon Shards sur le long terme.</strong> Une shard par semaine, c'est 4 par mois. En 3–4 mois tu as un Warframe end-game boosté avec 4–5 shards. La patience paie.</div>
+      </div>
+    </div>
+    <div class="info-box teal-box">
+      <div class="info-title it-teal">// Équipement &amp; Builds</div>
+      <div class="tip-grid">
+        <div class="tip-item"><strong>Catalysts et Reactors — pose-les bien.</strong> Ne les utilise pas sur des armes ou Warframes basiques. Réserve-les pour ce que tu uses vraiment en fin de partie.</div>
+        <div class="tip-item"><strong>Forma = patience.</strong> Une Forma s'installe en 23h. Avoir plusieurs Forma en craft simultané t'évite les goulots d'étranglement quand tu veux sortir un nouveau build.</div>
+        <div class="tip-item"><strong>Mods Galvanized &gt; Mods classiques.</strong> Les Mods Galvanized (achetés chez l'Arbitre de Hexis) ont des stats bien supérieures pour les armes end-game. Priorité absolue.</div>
+        <div class="tip-item"><strong>Ramasse les Ayatan Stars.</strong> Ces petites étoiles scintillantes en mission valent de l'Endo une fois insérées dans une sculpture et vendues à Maroo. Ne les ignore jamais.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+</div><!-- end app-wrapper -->
+
+<footer>
+  Outil non officiel — données 2025–2026 &nbsp;·&nbsp;
+  <a href="https://wiki.warframe.com" target="_blank">Warframe Wiki</a> &nbsp;·&nbsp;
+  <a href="https://warframe.market" target="_blank">warframe.market</a> &nbsp;·&nbsp;
+  <a href="https://hub.warframestat.us" target="_blank">Warframe Hub</a>
+</footer>
+
+<div id="back-top" onclick="scrollTo({top:0,behavior:'smooth'})">↑</div>
+
+<!-- ══════════════════════════ SCRIPT ══════════════════════════ -->
+<script>
+/* ════════════════════ DONNÉES ════════════════════ */
+
+const DAILY = [
+  {
+    id:'d-login', type:'daily',
+    name:'Connexion quotidienne',
+    tags:['credits'],
+    desc:'Se connecter chaque jour pour maintenir le streak de récompenses de login.',
+    how:`<p>Lance le jeu. C'est automatique — aucune action supplémentaire n'est requise. Le compteur de jours de connexion s'incrémente dès l'ouverture de la session.</p>`,
+    why:`<p>Le streak de connexion offre des récompenses à chaque palier : <strong>crédits</strong> au quotidien, et à partir de 30, 50 ou 100 jours des <strong>pièces Primes, des boosters ou même du Platine</strong>. Le streak ne se casse pas si tu sautes une journée.</p>`,
+    rewards:[
+      {c:'rd-gold',   t:'Crédits quotidiens (10 000 – 50 000 selon le palier)'},
+      {c:'rd-gold',   t:'Pièces Primes aux jalons (30, 50, 100 jours)'},
+      {c:'rd-purple', t:'Boosters d\'Affinité ou de Ressources ponctuellement'},
+    ],
+    tip:`Lance le jeu 30 secondes si tu n'as pas le temps de jouer — ça suffit pour maintenir le streak.`
+  },
+  {
+    id:'d-sortie', type:'daily', urgent:true,
+    name:'La Sortie',
+    tags:['urgent','plat','endo'],
+    desc:'3 missions enchaînées avec des modificateurs aléatoires. La récompense journalière la plus rentable.',
+    how:`<p>Orbiter → Navigation → <strong>Sortie</strong> (en bas à droite de l'écran). Complète les 3 missions dans l'ordre imposé. Les modificateurs changent chaque jour : ennemis blindés, corpus, grineer, missions sans pouvoirs... Adapte ton build en conséquence.</p><p>Si un modificateur te bloque (ex : "pas de bouclier"), utilise un frame orienté vie comme <em>Inaros</em> ou <em>Nidus</em>.</p>`,
+    why:`<p>La Sortie est ta meilleure source quotidienne de <strong>Riven Mods</strong>. Même si tu n'utilises pas le Riven obtenu, vérifie sa valeur sur warframe.market avant de le dissoudre — certains valent 200 à 500 plat.</p><p>En 15–25 minutes tu sécurises une récompense garantie chaque jour.</p>`,
+    rewards:[
+      {c:'rd-purple', t:'Riven Mod (arme aléatoire — peut valoir 100 à 500 plat)'},
+      {c:'rd-green',  t:'Endo (1 000 à 4 000)'},
+      {c:'rd-gold',   t:'Sculpture Ayatan'},
+      {c:'rd-teal',   t:'Ressources rares (Kuva, Orokin Cell, Neurodes...)'},
+      {c:'rd-gold',   t:'Blueprint Forma'},
+    ],
+    tip:`Un Riven non-identifié sur une arme populaire (Tigris, Arca Plasmor, Rubico...) peut valoir 200–400 plat non ouvert. Vérifie toujours avant d'ouvrir.`
+  },
+  {
+    id:'d-standing', type:'daily', urgent:true,
+    name:'Cap de réputation Syndicat',
+    tags:['urgent','plat'],
+    desc:'Remplir la jauge de réputation journalière avant qu\'elle soit perdue.',
+    how:`<p>Dans l'Orbiter, ouvre la <strong>Console Syndicat</strong> (à gauche de la navigation) et sélectionne le syndicat avec lequel tu veux pledger. La réputation monte automatiquement : <strong>15% de toute l'Affinité gagnée</strong> en mission est convertie en standing.</p><p>Vérifie ta progression dans Profil → Syndicats. Dès que la barre est pleine, la rep cesse de monter pour cette faction.</p>`,
+    why:`<p>La cap journalière est <strong>16 000 + (MR × 500)</strong>. Chaque point de rep au-delà est perdu — il n'y a pas de report. La montée en rang dans un syndicat débloque des <strong>armes exclusives, des Augments Warframe et des packs de relics</strong>.</p>`,
+    rewards:[
+      {c:'rd-gold',   t:'Progression vers le rang 5 du syndicat choisi'},
+      {c:'rd-gold',   t:'Packs de 3 relics (20 000 rep = 3 relics chez Ostron/Solaris/Entrati)'},
+      {c:'rd-purple', t:'Mods Augment exclusifs, armes de Syndicat'},
+    ],
+    tip:`Les Médaillons Syndicat trouvés dans les missions ne comptent PAS dans la cap. Collecte-les pour dépasser ta limite quotidienne.`
+  },
+  {
+    id:'d-nightwave', type:'daily', urgent:true,
+    name:'Défis Nightwave du jour',
+    tags:['urgent','plat'],
+    desc:'1 à 3 petits défis quotidiens du battle pass gratuit de Nora Night.',
+    how:`<p>Orbiter → Navigation → <strong>Nightwave</strong> (panneau radio en bas à droite, ou icône sur l'écran principal). Consulte l'onglet "Actes Quotidiens". Les défis sont généralement rapides : tuer X ennemis avec un type d'arme, compléter une mission dans une zone précise, utiliser un pouvoir Y fois.</p>`,
+    why:`<p>Chaque défi journalier rapporte ~<strong>1 000 Standing Nightwave</strong>. Pour finir une saison (rang 30, soit 300 000 standing total), les défis daily sont importants sur la durée. Chaque rang Nightwave débloque des <strong>Nora Credits</strong> échangeables contre des Forma, Catalysts et Reactors.</p>`,
+    rewards:[
+      {c:'rd-gold',   t:'Standing Nightwave (~1 000 par défi journalier)'},
+      {c:'rd-purple', t:'Nora Credits (en montant en rang)'},
+      {c:'rd-gold',   t:'Forma, Catalysts, Reactors, cosmétiques via la boutique Nightwave'},
+    ],
+    tip:`Ne t'inquiète pas si tu en rates quelques-uns — les défis hebdomadaires (4 500–10 000 standing chacun) représentent 70% du total. Concentre-toi sur eux en début de semaine.`
+  },
+  {
+    id:'d-focus', type:'daily',
+    name:'Cap de Focus quotidienne',
+    tags:['focus'],
+    desc:'Atteindre la limite de Focus journalière pour débloquer les arbres de l\'Opérateur.',
+    how:`<p>Équipe une <strong>Focus Lens</strong> sur ton Warframe ou ton arme principale (menu Équipement → Mods → Focus Lens en bas à droite). Lance le <strong>Sanctuary Onslaught</strong> accessible via Cephalon Simaris dans le Relay. L'Affinité gagnée en masse se convertit en Focus.</p><p>Arrête-toi quand la barre de Focus est pleine — l'excédent est perdu.</p>`,
+    why:`<p>Les écoles Opérateur sont parmi les upgrades les plus impactantes du jeu. <strong>Zenurik</strong> régénère l'énergie passivement (priorité absolue). <strong>Madurai</strong> booste les dégâts. <strong>Naramon</strong> améliore le combo en mêlée. Sans cap de Focus chaque jour, cette progression prend des mois.</p>`,
+    rewards:[
+      {c:'rd-teal',   t:'Points Focus pour l\'école Opérateur choisie'},
+      {c:'rd-blue',   t:'Déblocage Zenurik (regen d\'énergie passive — priorité 1)'},
+      {c:'rd-orange', t:'Madurai (dégâts Opérateur), Naramon (combo mêlée)'},
+    ],
+    tip:`Sanctuary Onslaught est la mission la plus efficace. Utilise un "nuke frame" (Saryn, Mesa, Equinox) équipé d'une Lens pour maximiser l'Affinité par minute.`
+  },
+  {
+    id:'d-steelpath', type:'daily',
+    name:'Incursion Steel Path du jour',
+    tags:['steel','plat'],
+    desc:'La mission Steel Path désignée du jour — source rapide de Steel Essence.',
+    how:`<p>Orbiter → Navigation → active le <strong>Steel Path</strong> (bouton en haut à droite de la starchart). Une mission balisée "Incursion" apparaît. Complète-la. Les ennemis sont niveau 100+ — tu as besoin d'un build abouti.</p>`,
+    why:`<p>Le Steel Essence s'accumule pour acheter chez <strong>Teshin</strong> (au Relay) les items les plus rares du jeu : <strong>Umbra Forma</strong>, Riven Ciphers, 3× Forma. L'Incursion daily est la façon la plus efficace d'accumuler le Steel Essence.</p>`,
+    rewards:[
+      {c:'rd-teal',   t:'Steel Essence ×6 minimum (plus si des Acolytes apparaissent)'},
+      {c:'rd-gold',   t:'Umbra Forma chez Teshin (accumule ~120 SE)'},
+      {c:'rd-purple', t:'Riven Mod, Riven Cipher chez Teshin'},
+    ],
+    tip:`Les Acolytes Steel Path spawnent pendant tes missions et droppent du Steel Essence supplémentaire. Ne pars pas dès qu'ils apparaissent.`
+  },
+  {
+    id:'d-darksector', type:'daily',
+    name:'Premier run Dark Sector',
+    tags:['credits'],
+    desc:'Le premier clear d\'un nœud Dark Sector double les crédits obtenus.',
+    how:`<p>Sur la starchart, les nœuds avec une <strong>flamme dorée/orange</strong> sont des Dark Sectors (ex : Hieracon sur Pluton, Ophelia sur Uranus, Gabii sur Cérès). Le premier clear de la journée applique un multiplicateur ×2 sur les crédits.</p><p>Hieracon en Excavation est le meilleur — il combine crédits doublés ET ouverture de relics Axi.</p>`,
+    why:`<p>Les crédits sont consommés massivement : craft de Warframes (30 000–100 000), upgrade de mods (des dizaines de milliers), construction d'objets dans le Foundry. Sans source régulière de crédits, la progression ralentit.</p>`,
+    rewards:[
+      {c:'rd-gold',  t:'Crédits ×2 sur le premier clear (50 000 – 150 000 selon la mission)'},
+      {c:'rd-green', t:'Ressources spécifiques à la planète (Nano Spores, Mutagen Samples...)'},
+    ],
+    tip:`Hieracon (Pluton) en Excavation est idéal : tu gagnes des crédits doublés ET tu ouvres des relics Axi en même temps. Fais 2–3 extracteurs avant d'extraire.`
+  },
+  {
+    id:'d-kubrow', type:'daily',
+    name:'Incubateur Kubrow — incuber &amp; récupérer les empreintes',
+    tags:['plat'],
+    desc:'Lancer une nouvelle incubation et récupérer les empreintes génétiques de ton Kubrow adulte.',
+    how:`<p><strong>Prérequis :</strong> avoir terminé la quête "Howl of the Kubrow" et posséder le Segment Incubateur (obtenu dans le Dojo du clan). Sans lui, l'incubation dure 48h — avec lui, seulement 24h.</p>
+<p><strong>Lancer une incubation :</strong> Orbiter → Incubateur (pièce à l'avant du vaisseau, à droite de l'Arsenal). Onglet "Élevage" → "Commencer une incubation aléatoire" pour un Kubrow surprise, ou "Incubation combinée" si tu utilises deux empreintes pour cibler un type précis. Il te faut un <em>Œuf de Kubrow</em> (farmé sur Terre en détruisant des tanières, ou achetable 10 plat sur le Marché).</p>
+<p><strong>Créer une empreinte :</strong> Ton Kubrow doit être adulte (clique sur "Faire mûrir" si encore chiot). Onglet "Empreintes" → "Créer une empreinte" → sélectionne ton Kubrow. L'empreinte prend <strong>1h30</strong> à se générer (ou 10 plat pour accélérer). Un même Kubrow peut donner au maximum <strong>2 empreintes</strong>.</p>
+<p><strong>Récupérer l'empreinte :</strong> Reviens à l'Incubateur après le délai et clique sur "Récupérer" dans l'onglet Empreintes. L'empreinte apparaît dans ton inventaire.</p>`,
+    why:`<p>Les empreintes Kubrow se vendent sur warframe.market. Un Kubrow avec un pelage rare (<strong>pattern Lotus</strong>) ou un physique <em>Bulky</em> peut valoir <strong>50 à 200 plat la paire d'empreintes</strong>. Les empreintes permettent aussi de préserver la génétique d'un Kubrow que tu aimes avant de le mettre en stase.</p>
+<p>Avoir le Segment Incubateur est essentiel : il réduit l'incubation à 24h (reset daily = parfait), réduit la perte de stabilité génétique à 5%/jour au lieu de 10%, et place automatiquement ton Kubrow en stase s'il est trop affaibli.</p>`,
+    rewards:[
+      {c:'rd-gold',   t:'Empreintes génétiques (50–200 plat la paire pour un Kubrow rare)'},
+      {c:'rd-purple', t:'Pattern Lotus ou physique Bulky = les plus demandés sur le marché'},
+      {c:'rd-teal',   t:'Kubrow adulte = compagnon de mission (Huras = camouflage, Raksa = bouclier)'},
+    ],
+    tip:`Le pattern <strong>Lotus</strong> est le plus rare et le plus cher. Si ton Kubrow l'a, crée les 2 empreintes immédiatement et vends-les sur warframe.market. Vérifie aussi le type physique : "Bulky" se vend bien. Pour identifier les couleurs rares, mets l'éclairage de ton vaisseau en noir ou blanc dans les options.`
+  },
+  {
+    id:'d-kim', type:'daily',
+    name:'Chat KIM — Parler avec les Protoframes (Warframe 1999)',
+    tags:['plat'],
+    desc:'Discuter chaque jour avec les 6 membres du Hex via le KIM pour monter la Chimie et débloquer du contenu exclusif.',
+    how:`<p><strong>Prérequis :</strong> avoir terminé la quête principale de Warframe 1999 et la quête "The Hex". Une fois fait, le terminal KIM (Kinemantik Instant Messenger) est accessible dans ta zone de base 1999.</p>
+<p><strong>Où chatier :</strong> Zone Warframe 1999 → Höllvania Central Mall → terminal à l'entrée de la base. Chaque conversation quotidienne se remet à zéro à <strong>0h00 UTC (1h00 heure française)</strong> — exactement en même temps que le reset daily.</p>
+<p><strong>Les 6 Protoframes du Hex :</strong></p>
+<ul style="margin:6px 0 10px 16px;line-height:1.8;font-size:12px;color:var(--txt)">
+  <li><strong style="color:var(--gold-light)">Arthur Nightingale</strong> — Protoframe d'Excalibur. Leader taciturne. Pseudonyme KIM : <em style="color:var(--txt-dim)">KN1GHT0_0</em>. Apprécie les blagues sèches, se méfie de l'intimité. Dateable au rang "Close". → <a href="https://wiki.warframe.com/w/Kinemantik_Instant_Messenger/Arthur" target="_blank" style="color:var(--teal)">Guide complet Arthur ↗</a></li>
+  <li><strong style="color:var(--gold-light)">Aoi Morohoshi</strong> — Protoframe de Mag. Optimiste et technophile. Pseudonyme : <em style="color:var(--txt-dim)">xX GLIMMER Xx</em>. Parle d'elle, de musique, de tech. Dateable au rang "Trusted". → <a href="https://wiki.warframe.com/w/Kinemantik_Instant_Messenger/Aoi" target="_blank" style="color:var(--teal)">Guide complet Aoi ↗</a></li>
+  <li><strong style="color:var(--gold-light)">Amir Beckett</strong> — Protoframe de Volt. Stagiaire tech hyperactif. Pseudonyme : <em style="color:var(--txt-dim)">H16h V0l7463</em>. Parle jeux vidéo, tech, gadgets. Dateable au rang "Trusted". → <a href="https://wiki.warframe.com/w/Kinemantik_Instant_Messenger/Amir" target="_blank" style="color:var(--teal)">Guide complet Amir ↗</a></li>
+  <li><strong style="color:var(--gold-light)">Lettie Garcia</strong> — Protoframe de Trinity. Médecin cynique avec une souris de compagnie. Pseudonyme : <em style="color:var(--txt-dim)">Belladonna</em>. Apprécie le respect et l'honnêteté. Dateable au rang "Close". → <a href="https://wiki.warframe.com/w/Kinemantik_Instant_Messenger/Lettie" target="_blank" style="color:var(--teal)">Guide complet Lettie ↗</a></li>
+  <li><strong style="color:var(--gold-light)">Eleanor Nightingale</strong> — Protoframe de Nyx. Journaliste aux pouvoirs psy. Pseudonyme : <em style="color:var(--txt-dim)">Salem</em>. Apprécie les échanges profonds et introspectifs. Dateable au rang "Close". → <a href="https://wiki.warframe.com/w/Kinemantik_Instant_Messenger/Eleanor" target="_blank" style="color:var(--teal)">Guide complet Eleanor ↗</a></li>
+  <li><strong style="color:var(--gold-light)">Quincy Isaacs</strong> — Protoframe de Cyte-09. Tireur d'élite arrogant. Pseudonyme : <em style="color:var(--txt-dim)">Soldja1Shot1kil</em>. Répond bien aux compliments et au flirt léger. Dateable au rang "Trusted". → <a href="https://wiki.warframe.com/w/Kinemantik_Instant_Messenger/Quincy" target="_blank" style="color:var(--teal)">Guide complet Quincy ↗</a></li>
+</ul>
+<p><strong>Les nouvelles conversations Techrot Encore :</strong> Velimir (Frost) et Minerva (Saryn) font partie des nouveaux Protoframes — non datables, mais leurs conversations augmentent ta réputation Hex. → <a href="https://wiki.warframe.com/w/Kinemantik_Instant_Messenger" target="_blank" style="color:var(--teal)">Wiki KIM complet ↗</a></p>`,
+    why:`<p>Chaque conversation quotidienne donne des points de <strong>Chimie</strong> — la jauge de relation avec chaque Protoframe. La progression suit 6 rangs : Neutre → Amical → Apprécié → Confiance → Proche → Meilleur ami → Aimé.</p>
+<p>La Chimie est <strong>plafonnée par ton rang Syndicat Hex</strong> : tu ne peux pas dépasser le rang "Confiance" sans avoir d'abord monté ton rang Hex suffisamment. Chatier et monter le Syndicat Hex vont donc de pair.</p>
+<p>Atteindre "Aimé" avec un personnage débloque des scènes exclusives, des cosmétiques uniques (skins Gemini), et des dialogues de lore essentiels à la compréhension de l'histoire de Warframe 1999. Les conversations KIM sont aussi nécessaires pour débloquer la quête finale "The Hex Finale".</p>`,
+    rewards:[
+      {c:'rd-purple', t:'Points de Chimie quotidiens (1–2 pts par conversation selon les réponses choisies)'},
+      {c:'rd-teal',   t:'Skins Gemini exclusifs pour les Warframes liés aux Protoframes'},
+      {c:'rd-gold',   t:'Scènes cinématiques et dialogues de lore au rang "Aimé"'},
+      {c:'rd-green',  t:'Déblocage de la quête "The Hex Finale" (rang "Apprécié" avec tous)'},
+    ],
+    tip:`Les réponses surlignées en doré dans le chat donnent un bonus de Chimie supplémentaire. Vérifie toujours le <strong>profil</strong> du personnage avant de chatter — il indique sa personnalité et les cadeaux qu'il apprécie ce jour-là. Envoyer le bon cadeau depuis la boutique DIRECTGIFTZ (dans le Mall) donne aussi de la Chimie.`
+  },
+];
+
+/* 10 reliques cochables */
+const RELICS = Array.from({length:10}, (_,i) => ({
+  id:`r-${i+1}`, type:'relic',
+  name:`Relique ${i+1} sur 10`,
+  tags:['plat'],
+  desc: i===0 ? 'Ouvre cette relic dans une mission Void Fissure en public.' :
+        i===4 ? 'À mi-chemin — pense à garder des Void Traces pour raffiner tes prochaines relics.' :
+        i===9 ? 'Dernière relic de la journée — objectif atteint !' :
+                'Ouvre cette relic dans une mission Void Fissure en public.',
+  how:`<p>Navigation → <strong>Void Fissures</strong> (dans le World State Window en haut à gauche). Choisis un type de mission (Capture ou Exterminate pour aller vite). Équipe ta relic avant d'entrer. Collecte 10 Réactants pour la craquer.</p><p>Joue toujours en <strong>mode public</strong> pour voir les récompenses des 3 autres joueurs en plus de la tienne.</p>`,
+  why:`<p>Chaque relic ouverte en public te donne le choix entre <strong>4 récompenses</strong> (la tienne + celles de 3 coéquipiers). Sur 10 relics/jour tu accumules des pièces Prime, des blueprints Forma, et des Ducats. C'est le moteur économique de Warframe.</p>`,
+  rewards:[
+    {c:'rd-gold',   t:'Pièces Prime (communes → Ducats, rares → vente ou craft)'},
+    {c:'rd-blue',   t:'Blueprint Forma ×2 (récompense fréquente)'},
+    {c:'rd-teal',   t:'6–30 Void Traces par relic ouverte'},
+  ],
+  tip: i===0 ? `Toujours jouer PUBLIC. Un groupe de 4 = 4 relics cracké pour le prix d'une mission.` :
+       i===4 ? `Si tu as obtenu la pièce rare que tu cherchais, arrête-toi. Inutile de gambler 5 relics de plus.` :
+       i===9 ? `Pense à convertir les doublons en Ducats au kiosque du Relay pour préparer la prochaine visite de Baro.` :
+               `Reste groupé en mission — les Réactants ont un rayon de partage. Un coéquipier parti loin prive tout le monde.`
+}));
+
+
+const WEEKLY = [
+  {
+    id:'w-archon', type:'weekly', urgent:true,
+    name:'Archon Hunt',
+    tags:['urgent','shard'],
+    desc:'3 missions hebdomadaires culminant sur un boss Archon — source principale d\'Archon Shards garanties.',
+    how:`<p>Orbiter → Navigation → <strong>Archon Hunt</strong> (section dédiée, distincte de la Sortie). 3 missions avec des modificateurs puissants et des ennemis à bouclier Sentient. Le boss final est soit Amar, Boreal, ou Nira selon la semaine.</p><p>Joue en escouade de 4 si tu débutes — les Archons absorbent beaucoup de dégâts. Amène un frame capable de survivre (Rhino, Inaros, Revenant).</p>`,
+    why:`<p>Les <strong>Archon Shards</strong> sont les upgrades les plus puissantes du jeu pour les Warframes. Chaque shard booste une stat : +50 énergie max, +150 points de vie, +10% force d'abilités... Une shard garantie par semaine = progression constante sur le long terme.</p>`,
+    rewards:[
+      {c:'rd-teal',   t:'Archon Shard garantie (Tau, Crimson, Azure, Amber, Topaz, Violet)'},
+      {c:'rd-gold',   t:'Ressources et mods end-game en bonus'},
+    ],
+    tip:`Les Archon Shards peuvent être "teintées" chez Chipper (camp de Kahl) pour devenir des Tauforged Shards avec 1,5× l'effet. Économise-les pour ça.`
+  },
+  {
+    id:'w-netracell', type:'weekly', urgent:true,
+    name:'Netracells ×5',
+    tags:['urgent','shard','arcane'],
+    desc:'5 missions Netracell avec les Pustules Voidrig hebdomadaires — deuxième source d\'Archon Shards.',
+    how:`<p>Orbiter → Navigation → <strong>Sanctum Anatomica</strong> (zone de The New War). Chaque Netracell consomme 1 Pustule Voidrig. Tu en reçois exactement 5 au reset du lundi. Mode end-game — niveau 100+ recommandé. Va-y en escouade.</p>`,
+    why:`<p>En plus de l'Archon Hunt, les Netracells ajoutent des Archon Shards aléatoires et des Arcanes de haut rang chaque semaine. Faire les 5 runs représente une progression significative. C'est la 2e source la plus régulière de Shards dans le jeu.</p>`,
+    rewards:[
+      {c:'rd-teal',   t:'Entrati Lanthorn (monnaie Entrati)'},
+      {c:'rd-blue',   t:'Archon Shards aléatoires (1–2 par mission)'},
+      {c:'rd-green',  t:'Arcanes de haut niveau'},
+      {c:'rd-gold',   t:'Adaptateurs de mêlée'},
+    ],
+    tip:`Si tu n'as pas le niveau requis, rejoins un escouade via le Recruitment Chat. Recherche "Netracell LF3" ou "Netracell 4/4".`
+  },
+  {
+    id:'w-archimedea', type:'weekly', urgent:true,
+    name:'Deep Archimedea',
+    tags:['urgent','shard','arcane'],
+    desc:'Mission hebdo avec contraintes de build — les rewards augmentent avec les restrictions respectées.',
+    how:`<p>Orbiter → Navigation → Sanctum Anatomica → <strong>Deep Archimedea</strong>. La mission impose des restrictions de loadout (ex : pas d'arme secondaire, pas de Warframe avec bouclier). Lis les règles attentivement avant d'entrer et adapte ton build.</p>`,
+    why:`<p>Plus tu respectes les contraintes imposées, meilleures sont tes récompenses. C'est une source fiable d'Archon Shards et d'Arcanes en complément des Netracells. Fortement rentable si tu as plusieurs builds préparés.</p>`,
+    rewards:[
+      {c:'rd-teal',   t:'Archon Shards (quantité variable selon les règles respectées)'},
+      {c:'rd-green',  t:'Arcanes rares'},
+      {c:'rd-gold',   t:'Ressources end-game'},
+    ],
+    tip:`Lis les restrictions dans le lobby avant de commencer. Avoir plusieurs Warframes et armes configurés te permet de maximiser les récompenses sans être bloqué.`
+  },
+  {
+    id:'w-nightwave', type:'weekly', urgent:true,
+    name:'Défis Nightwave hebdomadaires',
+    tags:['urgent','plat'],
+    desc:'Les gros défis de la semaine — la vraie source de Standing Nightwave.',
+    how:`<p>Nightwave → onglet <strong>"Actes Hebdomadaires"</strong>. Les défis hebdo sont plus longs mais donnent 4 500–7 000 standing chacun. Prends note de tous les défis en début de semaine pour les intégrer naturellement à tes sessions.</p>`,
+    why:`<p>Les défis hebdos représentent ~70% du Standing total d'une saison Nightwave. Sans eux, atteindre le rang 30 (300 000 standing) est quasi impossible. Les <strong>Elite Weekly</strong> (10 000 standing chacun) sont la priorité absolue.</p>`,
+    rewards:[
+      {c:'rd-gold',   t:'Standing Nightwave — 4 500 à 7 000 par défi normal'},
+      {c:'rd-teal',   t:'Elite Weekly : 10 000 Standing (les plus rentables du jeu)'},
+      {c:'rd-purple', t:'Nora Credits → Forma, Catalysts, Reactors, cosmétiques'},
+    ],
+    tip:`Les Elite Weekly sont plus difficiles mais valent 10 000 standing d'un coup. Commence par eux en début de semaine pendant que tu as de l'énergie.`
+  },
+  {
+    id:'w-circuit-normal', type:'weekly',
+    name:'Le Circuit Duviri — Normal',
+    tags:['plat'],
+    desc:'Farm hebdomadaire de pièces Warframe via le Circuit (rotation sur 11 semaines).',
+    how:`<p>Orbiter → Navigation → <strong>Duviri</strong> → The Circuit → Normal. Choisis l'un des 3 Warframes proposés cette semaine dans la rotation. Complète les stages (mix d'objectifs aléatoires).</p>`,
+    why:`<p>Chaque semaine, 3 Warframes différents sont disponibles sur une rotation de 11 semaines. Tu peux ainsi obtenir des frames sans avoir à grinder leurs boss spécifiques — pratique pour augmenter ton MR et compléter ta collection.</p>`,
+    rewards:[
+      {c:'rd-gold', t:'Neuroptics / Châssis / Systèmes des Warframes en rotation cette semaine'},
+    ],
+    tip:`Vérifie la rotation sur warframestat.us avant de jouer pour savoir quels Warframes sont disponibles cette semaine.`
+  },
+  {
+    id:'w-circuit-sp', type:'weekly',
+    name:'Le Circuit Duviri — Steel Path',
+    tags:['plat'],
+    desc:'Farm d\'Adaptateurs Incarnon via le Circuit Steel Path (rotation sur 8 semaines).',
+    how:`<p>Même accès que le Circuit Normal mais active le <strong>Steel Path</strong> avant d'entrer. Les Adaptateurs Incarnon Genesis sont les récompenses — ils permettent de transformer des armes de base en monstres end-game.</p>`,
+    why:`<p>Certains Adaptateurs Incarnon transforment des armes très basiques (Braton, Lato, Strun, Magistar) en armes de tier S. La rotation est de 8 semaines. Si tu rates une semaine avec un Adaptateur que tu voulais, attends la prochaine rotation.</p>`,
+    rewards:[
+      {c:'rd-teal', t:'Adaptateurs Incarnon Genesis (rotation 8 semaines)'},
+    ],
+    tip:`Priorité aux Adaptateurs pour des armes que tu utilises déjà. Certains comme le Braton Incarnon ou le Magistar Incarnon sont parmi les meilleures armes du jeu.`
+  },
+  {
+    id:'w-teshin', type:'weekly', urgent:true,
+    name:'Boutique Teshin — Steel Path',
+    tags:['urgent','steel','plat'],
+    desc:'Boutique hebdo de Teshin : le seul moyen régulier d\'obtenir l\'Umbra Forma.',
+    how:`<p>Relay → <strong>Teshin</strong> (dans le couloir principal de n'importe quel Relay). Dépense le Steel Essence accumulé via les Incursions daily et les missions Steel Path. La boutique se réinitialise chaque lundi.</p>`,
+    why:`<p>L'<strong>Umbra Forma</strong> est la ressource la plus rare du jeu — c'est l'unique moyen régulier de l'obtenir. Elle est indispensable pour les builds end-game très optimisés. Accumule le Steel Essence via les Incursions quotidiennes.</p>`,
+    rewards:[
+      {c:'rd-gold',   t:'Umbra Forma (nécessite ~120 Steel Essence — achat à cumuler)'},
+      {c:'rd-purple', t:'Riven Mod, Riven Cipher'},
+      {c:'rd-teal',   t:'3× Blueprints Forma'},
+    ],
+    tip:`Ordre de priorité chez Teshin : Umbra Forma > Riven Cipher > Forma Blueprint. Ne gaspille pas ton Steel Essence sur les autres items tant que tu n'as pas l'Umbra Forma.`
+  },
+  {
+    id:'w-acrithis', type:'weekly',
+    name:'Boutique Acrithis (Duviri)',
+    tags:['plat','endo'],
+    desc:'Boutique hebdo de Duviri : Rivens, Catalysts, Forma, Arcanes contre des Pathos Clamps.',
+    how:`<p>Complète <strong>Duviri Experience</strong> ou Dormizone puis parle à <strong>Acrithis</strong>. Achète avec des Pathos Clamps farmés en jouant Duviri. Les items en boutique changent chaque semaine.</p>`,
+    why:`<p>Rivens, Catalysts, Forma et Arcanes disponibles sans dépendre de la starchart classique. Certaines semaines proposent des Rivens rentables à revendre ou des Catalysts précieux.</p>`,
+    rewards:[
+      {c:'rd-purple', t:'Riven Mods (peut valoir 50–500 plat selon l\'arme)'},
+      {c:'rd-teal',   t:'Orokin Catalysts et Reactors'},
+      {c:'rd-gold',   t:'Forma, Arcanes variées'},
+    ],
+    tip:`Vérifie les Rivens proposés sur warframe.market avant d'acheter. Un bon Riven pour une arme populaire peut se vendre 100–500 plat directement.`
+  },
+  {
+    id:'w-yonta', type:'weekly',
+    name:'Boutique Yonta (Zariman)',
+    tags:['kuva'],
+    desc:'35 000 Kuva contre 5 Plumes Voidplume chez Archimedean Yonta.',
+    how:`<p>Chrysalith (Zariman Ten Zero, accessible après The New War) → parle à <strong>Archimedean Yonta</strong>. Échange 5 Voidplume Pinions contre 35 000 Kuva. Les Voidplume Pinions se ramassent dans les maps Zariman comme des collectibles.</p>`,
+    why:`<p>Le Kuva est l'une des ressources les plus consommées en fin de partie — il sert à reroller les Riven Mods et à fusionner les armes Kuva Lich. Ce shop est la source la plus efficace et régulière de Kuva.</p>`,
+    rewards:[
+      {c:'rd-orange', t:'35 000 Kuva (contre 5 Voidplume Pinions)'},
+    ],
+    tip:`Farme les Voidplume Pinions en jouant normalement les missions Zariman. Ils apparaissent dans les couloirs comme des objets lumineux collectibles.`
+  },
+  {
+    id:'w-palladino', type:'weekly',
+    name:'Boutique Palladino (Iron Wake)',
+    tags:['kuva','plat'],
+    desc:'Boutique hebdo de Palladino : Rivens et Kuva contre des Fragments Riven.',
+    how:`<p>Terre → <strong>Iron Wake</strong> → Palladino (dans la chapelle au fond). Nécessite d'avoir complété la quête <em>Chains of Harrow</em>. Échange les Fragments Riven (farmés sur des ennemis de niveau 41+, faible taux de drop).</p>`,
+    why:`<p>Source alternative de Riven Mods et de Kuva. Utile une fois que tu as accumulé des Fragments Riven via le jeu normal. Les Rivens disponibles ici changent chaque semaine.</p>`,
+    rewards:[
+      {c:'rd-purple', t:'Riven Mods contre des Fragments Riven'},
+      {c:'rd-orange', t:'Kuva contre des Fragments Riven'},
+    ],
+    tip:`Les Fragments Riven ont un très faible taux de drop. Ils s'accumulent naturellement en jouant des missions de niveau 41+. Ne grinde pas spécifiquement pour eux.`
+  },
+  {
+    id:'w-bird3', type:'weekly',
+    name:'Boutique Bird 3 (Cavia)',
+    tags:['shard'],
+    desc:'Boutique hebdo des Cavia avec des Archon Shards en rotation — utile pour compléter des builds précis.',
+    how:`<p>Laboratoire de Luvbrick → <strong>Bird 3</strong>. Nécessite le rang 5 avec les Cavia pour acheter. La shard disponible change chaque lundi — vérifie quel type est proposé cette semaine avant de jouer.</p>`,
+    why:`<p>Ce shop te permet d'obtenir un type précis d'Archon Shard qui ne serait pas tombé via l'Archon Hunt ou les Netracells. Très utile pour finaliser un build qui nécessite plusieurs shards du même type.</p>`,
+    rewards:[
+      {c:'rd-teal', t:'Archon Shard (type en rotation chaque semaine)'},
+    ],
+    tip:`Prioritise l'obtention du rang 5 Cavia assez tôt — la shard hebdo de Bird 3 représente une 3e source régulière de shards en plus des deux principales.`
+  },
+  {
+    id:'w-maroo', type:'weekly',
+    name:'Sculpture Ayatan (Maroo)',
+    tags:['endo'],
+    desc:'Mission puzzle hebdo de Maroo pour récupérer une sculpture Ayatan et la vendre contre de l\'Endo.',
+    how:`<p>Relay → <strong>Bazar de Maroo</strong> (Mars). Parle à Maroo pour accepter sa mission hebdomadaire. Elle t'envoie trouver une Ayatan Sculpture cachée dans un tileset aléatoire. Durée : 5–10 min avec un frame rapide (Volt, Gauss).</p><p>Une fois la sculpture récupérée, insert des Ayatan Stars dedans (elles se ramassent en mission) puis reviens la vendre à Maroo.</p>`,
+    why:`<p>L'Endo est nécessaire pour upgrader les mods à haut rang — certains mods essentiels coûtent 40 000 à 80 000 Endo pour être max-rankés. Cette mission hebdo est une source facile et garantie.</p>`,
+    rewards:[
+      {c:'rd-green', t:'Endo — 1 000 à 6 000 selon la sculpture et les stars insérées'},
+    ],
+    tip:`Insère toujours des Ayatan Stars dans la sculpture avant de la vendre — elles multiplient la valeur en Endo. Les stars se ramassent dans toutes les missions (petites étoiles scintillantes).`
+  },
+  {
+    id:'w-clem', type:'weekly',
+    name:'Mission Clem (Darvo)',
+    tags:['plat'],
+    desc:'Courte mission hebdomadaire de Darvo pour aider Clem — simple et rapide.',
+    how:`<p>Relay → <strong>Boutique Darvo</strong> → accepte la mission "Aider Clem". Une mission standard dans un tileset aléatoire, environ 10 minutes. Clem t'accompagne et tire enthousiaste sur tout ce qui bouge.</p>`,
+    why:`<p>Récompense : un Blueprint de <strong>Spectre Clem</strong>, invocable dans tes missions comme unité de soutien. Simple, rapide, et c'est une tradition hebdo que beaucoup de vétérans font les yeux fermés.</p>`,
+    rewards:[
+      {c:'rd-gold', t:'Blueprint Spectre Clem (unité de soutien invocable en mission)'},
+      {c:'rd-gold', t:'Crédits et ressources en bonus'},
+    ],
+    tip:`Même si tu as déjà le blueprint, la mission donne des crédits et des ressources. 10 minutes investies, aucun risque.`
+  },
+  {
+    id:'w-descendia', type:'weekly',
+    name:'Descendia — Descente de la Tour',
+    tags:['arcane','endo'],
+    desc:'Descente de tours hebdo : Arcanes, Endo et chance d\'Orokin Catalyst ou Reactor.',
+    how:`<p>Accessible via la Navigation (section missions spéciales). Descente étage par étage avec le boss <strong>Uriel</strong> au fond. Les récompenses tombent tous les 2 étages. La mission se réinitialise chaque lundi.</p>`,
+    why:`<p>Source d'Arcanes, d'Adaptateurs et d'Endo. Les étages les plus profonds peuvent donner des <strong>Orokin Catalysts ou Reactors</strong> — des ressources particulièrement précieuses. Hebdomadaire donc à ne pas manquer.</p>`,
+    rewards:[
+      {c:'rd-green',  t:'Arcanes variées'},
+      {c:'rd-teal',   t:'Adaptateurs Incarnon'},
+      {c:'rd-gold',   t:'Endo'},
+      {c:'rd-purple', t:'Orokin Catalyst ou Reactor (selon les étages atteints)'},
+    ],
+    tip:`Va le plus loin possible même si les étages deviennent difficiles — les récompenses des derniers niveaux sont les meilleures. Amène un build solide.`
+  },
+  {
+    id:'w-baro', type:'weekly',
+    name:'Baro Ki\'Teer (toutes les 2 semaines)',
+    tags:['plat','endo'],
+    desc:'Le marchand de luxe du Void — unique source de Prime Mods ultra-puissants.',
+    how:`<p>Baro apparaît dans un Relay aléatoire <strong>toutes les 2 semaines</strong> (généralement le vendredi soir). Dépense des <strong>Ducats</strong> (obtenus en vendant des pièces Primes au kiosque du Relay) <strong>et des Crédits</strong> pour ses articles.</p><p>Achète en priorité le <strong>Cache Surplus</strong> (50 000 crédits) qui contient Forma, Boosters et parfois un Legendary Core.</p>`,
+    why:`<p>Baro est la seule source de certains <strong>Prime Mods</strong> comme Primed Pressure Point, Primed Flow ou Primed Continuity — parmi les mods les plus impactants du jeu. Les manquer peut retarder ta progression de plusieurs mois.</p>`,
+    rewards:[
+      {c:'rd-gold',   t:'Prime Mods exclusifs (certains valent 200–800 plat en trade)'},
+      {c:'rd-teal',   t:'Cache Surplus : Forma, Boosters, Legendary Core possible'},
+      {c:'rd-purple', t:'Cosmétiques exclusifs Baro'},
+    ],
+    tip:`Consulte baro.wtf ou le Discord Warframe avant son arrivée pour connaître ses items à l'avance et préparer tes Ducats. Ne vends jamais tes pièces Primes en Ducats sans avoir vérifié si Baro vaut le déplacement.`
+  },
+  {
+    id:'w-1999cal', type:'weekly',
+    name:'Calendrier Warframe 1999 (Hex)',
+    tags:['shard','arcane','plat'],
+    desc:'Objectifs hebdomadaires du calendrier 1999 : Archon Shards, Rivens, Arcanes.',
+    how:`<p>Zone Warframe 1999 → <strong>Calendrier Hex</strong>. Complète les objectifs de la semaine. Souvent combinable avec le farm de réputation Hex. Les objectifs varient : kills d'ennemis spécifiques, missions de la zone, bounties.</p>`,
+    why:`<p>Le calendrier 1999 tourne sur 3 mois avec des objectifs différents chaque semaine. Parmi les sources les plus variées : Archon Shards, Rivens, Arcanes. Très rentable si tu joues déjà la zone 1999.</p>`,
+    rewards:[
+      {c:'rd-teal',   t:'Archon Shards'},
+      {c:'rd-purple', t:'Riven Mods'},
+      {c:'rd-green',  t:'Arcanes rares'},
+    ],
+    tip:`Fais les objectifs Hex Syndicat en même temps pour doubler l'efficacité de chaque session dans la zone 1999.`
+  },
+];
+
+const SYNDICATES = [
+  {
+    name:'Steel Meridian', type:'Faction principale — Groupe A', color:'#E86030',
+    how:`Pledge dans l'Orbiter → Console Syndicat. 15% de toute l'Affinité gagnée en mission = réputation automatique.`,
+    why:`Alliée de Red Veil (qui gagne 50% de ta rep passivement). Donne accès aux armes Vaykor Hek, Vaykor Marelok et Vaykor Sydon. Compatible avec Arbiters of Hexis et Cephalon Suda.`,
+    tags:['Vaykor Hek','Vaykor Marelok','Augments Excalibur/Frost/Nova','Packs Relics']
+  },
+  {
+    name:'Arbiters of Hexis', type:'Faction principale — Groupe A', color:'#6080E8',
+    how:`Même méthode que Steel Meridian. Alliée de Cephalon Suda. Compatible avec les deux autres membres du Groupe A.`,
+    why:`Donne les armes Telos Boltor, Telos Akbolto et Telos Boltace. Mods Galvanisés achetables uniquement ici — parmi les meilleurs mods d'armes du jeu. Accès au fameux "Arbitrations" endgame.`,
+    tags:['Telos Boltor','Telos Boltace','Mods Galvanisés','Packs Relics']
+  },
+  {
+    name:'Cephalon Suda', type:'Faction principale — Groupe A', color:'#A070E0',
+    how:`Même méthode. Alliée de Arbiters of Hexis. Compatible Groupe A.`,
+    why:`Donne le Synoid Simulor et le Synoid Gammacor. Le pack de regen de bouclier est utile en mission longue. Bonne option pour les joueurs qui visent les armes Syndicat alternatives.`,
+    tags:['Synoid Simulor','Synoid Gammacor','Regen bouclier','Packs Relics']
+  },
+  {
+    name:'The Perrin Sequence', type:'Faction principale — Groupe B', color:'#30B890',
+    how:`Même méthode. Alliée de New Loka. Ennemie de Steel Meridian — incompatible avec le Groupe A.`,
+    why:`Donne le Secura Penta et le Secura Lecta. Le pack d'énergie passive en mission est très utile. Groupe B avec Red Veil et New Loka.`,
+    tags:['Secura Penta','Secura Lecta','Pack énergie','Packs Relics']
+  },
+  {
+    name:'Ostron', type:'Neutre — Cetus (Terre)', color:'#C8A050',
+    how:`Cetus (Terre) → Bounties de Konzu. La réputation monte via les bounties dans les Plaines d'Eidolon.`,
+    why:`Accès aux Zaws (armes de mêlée personnalisées), aux Amps (via les Quills) et aux packs de relics Lith/Meso. Essentiel pour les joueurs qui veulent des builds mêlée personnalisés.`,
+    tags:['Zaws (mêlée custom)','Packs Relics Lith/Meso','Ressources Eidolon','Mods pêche/chasse']
+  },
+  {
+    name:'Solaris United', type:'Neutre — Fortuna (Vénus)', color:'#60C8E8',
+    how:`Fortuna (Vénus) → Bounties d'Eudico. Rep via les bounties dans les Plaines de Fortuna.`,
+    why:`Accès aux Kitguns (pistolets personnalisés) et aux compagnons Moa. Vox Solaris (sous-faction) donne les Arcanes de surface. Essentiel pour qui veut des pistolets custom puissants.`,
+    tags:['Kitguns (pistolets custom)','Compagnons Moa','Arcanes Vox Solaris','Packs Relics']
+  },
+  {
+    name:'Entrati', type:'Neutre — Nécralisk (Déimos)', color:'#8050B0',
+    how:`Nécralisk (Déimos) → Bounties de Loid/Mère. Rep via les bounties dans les Plaines Infestées de Déimos.`,
+    why:`Accès aux Nécramechs (méchas de combat), aux améliorations Helminth (pour modifier les abilités des Warframes) et aux packs de relics Neo/Axi. Source importante d'Entrati Lanthorn (monnaie Netracell).`,
+    tags:['Pièces Nécramech','Améliorations Helminth','Packs Relics Neo/Axi','Entrati Lanthorn']
+  },
+  {
+    name:'The Holdfasts', type:'Neutre — Zariman', color:'#B0D070',
+    how:`Chrysalith (Zariman Ten Zero) → missions Angel of the Zariman. Rep via les Plumes Voidplume collectées en mission.`,
+    why:`Donne accès aux Arcanes end-game les plus puissantes du jeu : Arcane Blessing, Arcane Energize... et aux anciens Adaptateurs Incarnon. Rang 5 indispensable pour accéder à toutes les Arcanes.`,
+    tags:['Arcanes top tier','Adaptateurs Incarnon','Échange Voidplume','Mods Zariman']
+  },
+  {
+    name:'Cavia', type:'Neutre — Laboratoire de Luvbrick', color:'#E09850',
+    how:`Laboratoire de Luvbrick → missions Whispers in the Walls. Rep via les items collectés dans les missions.`,
+    why:`Rang 5 requis pour la boutique de Bird 3 (Archon Shards hebdomadaires). Source d'Arcanes et de ressources Incarnon pour les armes récentes. Syndicat récent mais très rentable en end-game.`,
+    tags:['Boutique Bird 3 (Archon Shards)','Arcanes Incarnon','Mods Cavia','Ressources']
+  },
+  {
+    name:'The Hex', type:'Neutre — Warframe 1999', color:'#E86888',
+    how:`Höllvania Central Mall (Warframe 1999) → Bounties et Calendrier. Rep via les Trésors Hex et les bounties.`,
+    why:`Source des récompenses uniques de la zone 1999 : cosmétiques Protoframe, Arcanes exclusives et progression du Calendrier hebdo. Neutre = aucun impact négatif sur les autres syndicats.`,
+    tags:['Cosmétiques Protoframe','Arcanes 1999','Calendrier hebdo','Coda Weapons']
+  },
+  {
+    name:'Cephalon Simaris', type:'Neutre — Relay', color:'#70C8A0',
+    how:`Relay → Simaris (Sanctuaire). Rep via la Synthèse des cibles désignées que tu trouves en mission.`,
+    why:`Vend la <strong>clé du Simulacrum</strong> — outil indispensable pour tester tous tes builds contre n'importe quel ennemi du jeu, sans risque et sans limite. Achat prioritaire dès que possible.`,
+    tags:['Clé du Simulacrum (priorité absolue)','Mods uniques Simaris','Synthesizer Scanner']
+  },
+  {
+    name:"Kahl's Garrison", type:'Neutre — Camp du Drifter', color:'#B07840',
+    how:`Camp du Drifter → missions Break Narmer avec Kahl. Pas de standing classique : tu montes en rang en complétant 1 mission par semaine.`,
+    why:`Donne accès aux <strong>Archon Mods</strong> (parmi les meilleurs mods du jeu — boostent les abilités de façon unique) et au Warframe Styanax. Chipper (rang 3) permet de transformer des Archon Shards en Tauforged Shards (effet ×1,5).`,
+    tags:["Archon Mods (top tier)",'Warframe Styanax','Tauforged Shards via Chipper','Monnaie Stock']
+  },
+];
+
+/* ═══════════════ PROFILS ═══════════════ */
+const PROFILES = {
+  bacem: { label: 'Bacemm', key: 'wf_duo_bacem', color: '#C9A84C', cls: 'pba-bacem' },
+  rayan: { label: 'Rayan',  key: 'wf_duo_rayan', color: '#4ECDC4', cls: 'pba-rayan' },
+};
+
+let currentProfile = null;
+
+function getProfileState(profileId) {
+  try {
+    const raw = localStorage.getItem(PROFILES[profileId].key);
+    return raw ? JSON.parse(raw) : {};
+  } catch(e) { return {}; }
+}
+
+function saveProfileState(profileId, state) {
+  try { localStorage.setItem(PROFILES[profileId].key, JSON.stringify(state)); } catch(e) {}
+}
+
+function loginAs(profileId) {
+  currentProfile = profileId;
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('app-wrapper').style.display = 'block';
+
+  const prof = PROFILES[profileId];
+  const av = document.getElementById('pb-av');
+  av.textContent = prof.label[0];
+  av.className = 'pb-avatar ' + prof.cls;
+  document.getElementById('pb-name').textContent = prof.label;
+
+  load();
+  applyMRFromState();
+  renderAll();
+  updateOtherBar();
+  tick();
+}
+
+function switchProfile() {
+  currentProfile = null;
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('app-wrapper').style.display = 'none';
+  updateLoginCards();
+}
+
+function updateLoginCards() {
+  for (const pid of ['bacem','rayan']) {
+    const st = getProfileState(pid);
+    runAutoReset(st, pid);
+    const all = [...DAILY, ...RELICS, ...WEEKLY];
+    const done = all.filter(t => st['c_'+t.id]).length;
+    const total = all.length;
+    const pct = total ? Math.round(done/total*100) : 0;
+    const progEl = document.getElementById('login-prog-'+pid);
+    const barEl  = document.getElementById('login-bar-'+pid);
+    if (progEl) progEl.textContent = done+'/'+total;
+    if (barEl)  barEl.style.width  = pct+'%';
+  }
+}
+
+function updateOtherBar() {
+  const other = currentProfile === 'bacem' ? 'rayan' : 'bacem';
+  const prof  = PROFILES[other];
+  const st    = getProfileState(other);
+  const label = document.getElementById('other-label');
+  const chips = document.getElementById('other-chips');
+  if (!label || !chips) return;
+
+  const doneTasks = [...DAILY, ...RELICS, ...WEEKLY].filter(t => st['c_'+t.id]);
+  label.textContent = prof.label + ' a coché :';
+
+  if (doneTasks.length === 0) {
+    chips.innerHTML = '<span style="font-size:11px;color:var(--txt-dim)">aucune tâche pour l\'instant</span>';
+    return;
+  }
+  const chipCls = other === 'bacem' ? 'opb-chip done-chip bacem-chip' : 'opb-chip done-chip';
+  chips.innerHTML = doneTasks.slice(0,8).map(t =>
+    `<span class="${chipCls}">${t.name}</span>`
+  ).join('') + (doneTasks.length > 8 ? `<span class="opb-chip" style="color:var(--txt-dim);border-color:var(--border)">+${doneTasks.length-8} autres</span>` : '');
+}
+
+/* ═══════════════ ÉTAT (par profil) ═══════════════ */
+let S = {};
+let activeF = new Set(['urgent','shard','plat','kuva','endo']);
+let secOpen = {daily:true, relics:true, weekly:true, synds:true, habits:true};
+
+function load() {
+  if (!currentProfile) return;
+  S = getProfileState(currentProfile);
+  runAutoReset(S, currentProfile);
+}
+
+function save() {
+  if (!currentProfile) return;
+  saveProfileState(currentProfile, S);
+  updateOtherBar();
+}
+
+function runAutoReset(state, profileId) {
+  const now = Date.now();
+  const prevD = getNextReset('daily').getTime() - 86400000;
+  const prevW = getNextReset('weekly').getTime() - 7*86400000;
+  let changed = false;
+  if (!state.lastD || state.lastD < prevD) {
+    state.lastD = now;
+    DAILY.forEach(t => state['c_'+t.id] = false);
+    RELICS.forEach(t => state['c_'+t.id] = false);
+    changed = true;
+  }
+  if (!state.lastW || state.lastW < prevW) {
+    state.lastW = now;
+    WEEKLY.forEach(t => state['c_'+t.id] = false);
+    changed = true;
+  }
+  if (changed) saveProfileState(profileId, state);
+}
+
+
+function getNextReset(type) {
+  const d = new Date();
+  d.setHours(1,0,0,0);
+  if (type === 'daily') {
+    if (new Date() >= d) d.setDate(d.getDate()+1);
+  } else {
+    const wd = d.getDay();
+    const add = wd === 1 && new Date() < d ? 0 : (8-wd)%7||7;
+    d.setDate(d.getDate()+add);
+    if (wd === 1 && new Date() >= d) d.setDate(d.getDate()+7);
+  }
+  return d;
+}
+
+/* ═══════════════ TIMERS ═══════════════ */
+function pad(n) { return String(Math.floor(n)).padStart(2,'0'); }
+
+function tick() {
+  const now = new Date();
+
+  ['daily','weekly'].forEach(type => {
+    const diff = getNextReset(type) - now;
+    const h = Math.floor(diff/3600000);
+    const m = Math.floor((diff%3600000)/60000);
+    const sec = Math.floor((diff%60000)/1000);
+    const el = document.getElementById('t-'+type);
+    if (el) el.textContent = pad(h)+':'+pad(m)+':'+pad(sec);
+  });
+
+  // Daily date display
+  const dn = document.getElementById('t-daily-date');
+  if (dn) {
+    const nd = getNextReset('daily');
+    dn.textContent = nd.toLocaleDateString('fr-FR',{weekday:'short',day:'numeric',month:'short'})+' à 1h00';
+  }
+
+  // Baro : approximation bi-hebdo
+  const baroBase = new Date('2024-01-12T17:00:00Z');
+  const cycle = 14*86400000;
+  let nb = new Date(baroBase);
+  while (nb <= now) nb = new Date(nb.getTime()+cycle);
+  const bd = getNextReset('daily'); // placeholder
+  const bdiff = nb - now;
+  const bdays = Math.floor(bdiff/86400000);
+  const bhour = Math.floor((bdiff%86400000)/3600000);
+  const bmin  = Math.floor((bdiff%3600000)/60000);
+  const bEl = document.getElementById('t-baro');
+  if (bEl) bEl.textContent = bdays+'j '+pad(bhour)+'h'+pad(bmin);
+  const bD = document.getElementById('t-baro-date');
+  if (bD) bD.textContent = nb.toLocaleDateString('fr-FR',{weekday:'short',day:'numeric',month:'short'});
+
+  checkAutoReset();
+}
+
+function checkAutoReset() {
+  if (!currentProfile) return;
+  runAutoReset(S, currentProfile);
+}
+
+/* ═══════════════ MR ═══════════════ */
+function updateMR() {
+  const mr = parseInt(document.getElementById('mr-in').value)||0;
+  S.mr = mr;
+  const cap = (16000 + mr*500).toLocaleString('fr-FR');
+  document.getElementById('mr-cap').textContent = cap;
+  save();
+}
+
+function applyMRFromState() {
+  const inp = document.getElementById('mr-in');
+  if (inp && S.mr !== undefined) inp.value = S.mr;
+  updateMR();
+}
+
+/* ═══════════════ RENDER ═══════════════ */
+function buildCard(t) {
+  const done = !!S['c_'+t.id];
+  const tagHtml = (t.tags||[]).map(tg => `<span class="tag tag-${tg}">${tagLbl(tg)}</span>`).join('');
+  const isFiltered = filterHide(t);
+  const rewardHtml = (t.rewards||[]).map(r =>
+    `<div class="reward-row"><span class="rdot ${r.c}"></span>${r.t}</div>`).join('');
+  const stripCls = t.urgent ? 'strip-urgent' : (t.type==='weekly' ? 'strip-weekly' : t.type==='relic' ? 'strip-relics' : 'strip-daily');
+
+  const other = currentProfile === 'bacem' ? 'rayan' : 'bacem';
+  const otherState = getProfileState(other);
+  const otherDone = !!otherState['c_'+t.id];
+  const otherLabel = PROFILES[other].label;
+  const otherTickHtml = otherDone
+    ? `<span class="other-tick ot-${other}" title="${otherLabel} a aussi fait ça">${otherLabel} ✓</span>`
+    : '';
+
+  return `<div class="card${done?' done':''}${isFiltered?' hidden':''}" id="card-${t.id}">
+  <div class="strip ${stripCls}"></div>
+  <div class="card-row" onclick="tick_chk('${t.id}')">
+    <div class="chk${done?' ticked':''}"></div>
+    <div class="card-body">
+      <div class="card-name">${t.name}</div>
+      <div class="card-tags">${tagHtml}${otherTickHtml}</div>
+      <div class="card-desc">${t.desc}</div>
+    </div>
+  </div>
+  <div class="expand-zone">
+    <button class="expand-btn" onclick="toggle_det('${t.id}')">
+      <span class="expand-arrow" id="ea-${t.id}">▼</span>
+      Comment · Pourquoi · Récompenses
+    </button>
+  </div>
+  <div class="detail" id="det-${t.id}">
+    <div class="detail-tabs">
+      <button class="dtab active" onclick="dtab('${t.id}','how',this)">Comment faire</button>
+      <button class="dtab"        onclick="dtab('${t.id}','why',this)">Pourquoi</button>
+      <button class="dtab"        onclick="dtab('${t.id}','rew',this)">Récompenses</button>
+    </div>
+    <div class="dpanel active" id="pan-${t.id}-how">${t.how||''}<div class="tip-block">${t.tip||''}</div></div>
+    <div class="dpanel" id="pan-${t.id}-why">${t.why||''}</div>
+    <div class="dpanel" id="pan-${t.id}-rew">${rewardHtml}</div>
+  </div>
+</div>`;
+}
+
+function tagLbl(tg) {
+  return {
+    urgent:'Prioritaire', shard:'Archon Shard', plat:'Platine',
+    kuva:'Kuva', endo:'Endo', credits:'Crédits', focus:'Focus',
+    steel:'Steel Essence', arcane:'Arcane'
+  }[tg] || tg;
+}
+
+function filterHide(t) {
+  if (activeF.size >= 5) return false;
+  const fTags = (t.tags||[]).filter(tg => ['urgent','shard','plat','kuva','endo'].includes(tg));
+  if (!fTags.length) return false;
+  return !fTags.some(tg => activeF.has(tg));
+}
+
+function renderAll() {
+  const gD = document.getElementById('g-daily');
+  const gR = document.getElementById('g-relics-tasks');
+  const gW = document.getElementById('g-weekly');
+  if (gD) gD.innerHTML = DAILY.map(buildCard).join('');
+  if (gR) gR.innerHTML = RELICS.map(buildCard).join('');
+  if (gW) gW.innerHTML = WEEKLY.map(buildCard).join('');
+  renderSynds();
+  updateProgress();
+}
+
+function renderSynds() {
+  const el = document.getElementById('synd-grid');
+  if (!el) return;
+  el.innerHTML = SYNDICATES.map(s => `
+    <div class="synd-card">
+      <div class="synd-head">
+        <div class="synd-icon" style="background:${s.color}20;color:${s.color};border:1px solid ${s.color}40">${s.name.substring(0,2).toUpperCase()}</div>
+        <div class="synd-name-block">
+          <div class="synd-name">${s.name}</div>
+          <div class="synd-type">${s.type}</div>
+        </div>
+      </div>
+      <div class="synd-body">
+        <div class="synd-line"><strong>Comment :</strong> ${s.how}</div>
+        <div class="synd-line">${s.why}</div>
+        <div class="synd-tags">${s.tags.map(t=>`<span class="synd-tag">${t}</span>`).join('')}</div>
+      </div>
+    </div>`).join('');
+}
+
+/* ═══════════════ INTERACTIONS ═══════════════ */
+function tick_chk(id) {
+  S['c_'+id] = !S['c_'+id];
+  save();
+  const card = document.getElementById('card-'+id);
+  if (!card) return;
+  card.classList.toggle('done', S['c_'+id]);
+  const chk = card.querySelector('.chk');
+  if (chk) chk.classList.toggle('ticked', S['c_'+id]);
+  updateProgress();
+}
+
+function toggle_det(id) {
+  const det = document.getElementById('det-'+id);
+  const arr = document.getElementById('ea-'+id);
+  if (!det) return;
+  const open = det.classList.toggle('open');
+  if (arr) arr.classList.toggle('open', open);
+}
+
+function dtab(id, tab, btn) {
+  ['how','why','rew'].forEach(p => {
+    const el = document.getElementById('pan-'+id+'-'+p);
+    if (el) el.classList.toggle('active', p===tab);
+  });
+  btn.parentElement.querySelectorAll('.dtab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function toggleSec(key) {
+  secOpen[key] = !secOpen[key];
+  const targets = {
+    daily: 'g-daily',
+    relics: 'g-relics',
+    weekly: 'g-weekly',
+    synds: 'g-synds',
+    habits: 'g-habits',
+  };
+  const g = document.getElementById(targets[key]);
+  if (g) g.style.display = secOpen[key] ? '' : 'none';
+  const c = document.getElementById('c-'+key);
+  if (c) c.classList.toggle('open', secOpen[key]);
+}
+
+function toggleF(el) {
+  const f = el.dataset.f;
+  if (activeF.has(f)) activeF.delete(f); else activeF.add(f);
+  el.classList.toggle('on', activeF.has(f));
+  [...DAILY, ...RELICS, ...WEEKLY].forEach(t => {
+    const card = document.getElementById('card-'+t.id);
+    if (card) card.classList.toggle('hidden', filterHide(t));
+  });
+}
+
+function resetType(type) {
+  if (type==='all') {
+    [...DAILY,...RELICS,...WEEKLY].forEach(t => S['c_'+t.id]=false);
+  } else if (type==='relics') {
+    RELICS.forEach(t => S['c_'+t.id]=false);
+  } else if (type==='daily') {
+    DAILY.forEach(t => S['c_'+t.id]=false);
+  } else if (type==='weekly') {
+    WEEKLY.forEach(t => S['c_'+t.id]=false);
+  }
+  save();
+  renderAll();
+}
+
+/* ═══════════════ PROGRESSION ═══════════════ */
+function updateProgress() {
+  const dC = DAILY.filter(t=>S['c_'+t.id]).length;
+  const wC = WEEKLY.filter(t=>S['c_'+t.id]).length;
+  const rC = RELICS.filter(t=>S['c_'+t.id]).length;
+  const dT=DAILY.length, wT=WEEKLY.length, rT=RELICS.length;
+
+  set('pd-num',`${dC} / ${dT}`);
+  set('pw-num',`${wC} / ${wT}`);
+  set('pr-num',`${rC} / ${rT}`);
+  set('b-daily', `${dC} / ${dT}`);
+  set('b-weekly',`${wC} / ${wT}`);
+  set('b-relics',`${rC} / ${rT}`);
+
+  setW('pd-bar', dC/dT*100);
+  setW('pw-bar', wC/wT*100);
+  setW('pr-bar', rC/rT*100);
+}
+
+function set(id,v) { const e=document.getElementById(id); if(e) e.textContent=v; }
+function setW(id,v) { const e=document.getElementById(id); if(e) e.style.width=Math.round(v)+'%'; }
+
+/* ═══════════════ SCROLL TOP ═══════════════ */
+window.addEventListener('scroll', () => {
+  const el = document.getElementById('back-top');
+  if (el) el.classList.toggle('show', scrollY > 300);
+});
+
+/* ═══════════════ INIT ═══════════════ */
+document.getElementById('app-wrapper').style.display = 'none';
+document.getElementById('login-screen').style.display = 'flex';
+updateLoginCards();
+setInterval(tick, 1000);
+document.getElementById('mr-in').addEventListener('input', updateMR);
+</script>
+</body>
+</html>
